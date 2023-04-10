@@ -56,8 +56,7 @@ namespace Model
         {
             if (Users != null && Users.Count > 0 && !string.IsNullOrEmpty(path))
             {
-                string StrJson = JsonSerializer.Serialize(Users, jso); 
-                File.WriteAllText(path, StrJson);
+                File.WriteAllText(path, JsonSerializer.Serialize(Users, jso));
             }
             else Debug.WriteLine("Список не схранён");
         }
