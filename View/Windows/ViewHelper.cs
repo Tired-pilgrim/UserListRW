@@ -30,6 +30,10 @@ namespace Views.Windows
         {
             vm.OpenListUser(OpenSaveHelper.OpenDial());
         });
+        public static RelayCommand<MainViewModel>  SaveListUserDialog { get; } = new RelayCommand<MainViewModel>(vm =>
+        {
+            vm.SaveListUser(OpenSaveHelper.SaveDial());
+        });
     }
  }
 

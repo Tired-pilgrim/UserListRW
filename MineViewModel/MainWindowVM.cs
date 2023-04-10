@@ -34,6 +34,7 @@ namespace ViewModel
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
         }
         public void OpenListUser(string puth) => mineModel.OpenList(puth);
+        public void SaveListUser(string puth) => mineModel.SaveList(puth);
         // Только для режима разработки
         //public MainViewModel()
         //{

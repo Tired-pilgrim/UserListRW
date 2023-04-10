@@ -51,6 +51,16 @@ namespace Model
             }
             else Debug.WriteLine("Список не загружен");
         }
+
+        public void SaveList(string path)
+        {
+            if ( Users != null && Users.Count >0 && !string.IsNullOrEmpty(path))
+            {
+                string StrJson = JsonSerializer.Serialize(Users, jso); 
+                File.WriteAllText(path, StrJson);
+            }
+            else Debug.WriteLine("Список не схранён");
+        }
     }
 
 }

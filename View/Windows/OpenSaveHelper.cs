@@ -37,5 +37,14 @@ namespace Views.Windows
             }
             return string.Empty;
         }
+        public static string  SaveDial()
+        {
+            bool? result = _saveFdialog.ShowDialog();
+            if (result == true)
+            {
+                return _saveFdialog.FileName;
+            }
+            return string.Empty;
+        }
     }
 }
