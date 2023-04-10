@@ -22,7 +22,7 @@ namespace Model
         private readonly JsonSerializerOptions jso;
         public MainModel()
         {
-            Users = new(privateUsers);
+            Users = new();
             jso = new JsonSerializerOptions
             {
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
@@ -54,7 +54,7 @@ namespace Model
 
         public void SaveList(string path)
         {
-            if ( Users != null && Users.Count >0 && !string.IsNullOrEmpty(path))
+            if (Users != null && Users.Count > 0 && !string.IsNullOrEmpty(path))
             {
                 string StrJson = JsonSerializer.Serialize(Users, jso); 
                 File.WriteAllText(path, StrJson);
