@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="MineViewModel.cs" />
+    <Compile Remove="MineViewModeOldl.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="MineViewModel.cs" />
+    <None Include="MineViewModeOldl.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VievModelLib\VievModelLib.csproj" />
+  </ItemGroup>
+
+</Project>
