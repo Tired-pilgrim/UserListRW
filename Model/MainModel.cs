@@ -13,12 +13,7 @@ namespace Model
     {
         //Вторая ветвь
         public ObservableCollection<User>? Users { get; private set; }
-        private ObservableCollection<User> privateUsers { get; } = new()
-        {
-            //new User { Name = "Вася", Family = "Васильев", Job="Студент" },
-            //new User { Name = "Николай", Family = "Алексеев", Job="Аспирант"},
-            //new User { Name = "Сидор", Family = "Сидоров", Job="Ректор" }
-        };
+      
         public event EventHandler? NewUserList;
         private readonly JsonSerializerOptions jso;
         public MainModel()
