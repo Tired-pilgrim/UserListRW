@@ -1,14 +1,22 @@
 ﻿using Microsoft.Win32;
+using ModelLib;
 using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
+using System.Windows.Shapes;
 
 namespace Views.Windows
 {
     public static class OpenSaveHelper
     {
-        static  OpenFileDialog _openFdialog;
+        static OpenFileDialog _openFdialog;
         static SaveFileDialog _saveFdialog;
         static readonly string ListFolder = Environment.CurrentDirectory + @"\Списки\";
+        static readonly JsonSerializerOptions jso;
         static OpenSaveHelper()
         {
             Directory.CreateDirectory(ListFolder);
@@ -26,25 +34,43 @@ namespace Views.Windows
                 DefaultExt = ".json",
                 InitialDirectory = ListFolder
             };
+            jso = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
+            };
         }
 
-       public static string OpenDial()
+        public static ObservableCollection<User>? OpenDial()
         {
             bool? result = _openFdialog.ShowDialog();
             if (result == true)
             {
-                return _openFdialog.FileName;
+                string StrJson = File.ReadAllText(_openFdialog.FileName);
+                if (!string.IsNullOrEmpty(StrJson))
+                {
+                    return JsonSerializer.Deserialize<ObservableCollection<User>>(StrJson);
+                }
+                else Debug.WriteLine("Список не загружен");
             }
-            return string.Empty;
+            else Debug.WriteLine("Список не загружен");
+            return null;
         }
-        public static string  SaveDial()
+            
+   
+    
+        public static bool  SaveDial(ObservableCollection<User> Users)
         {
             bool? result = _saveFdialog.ShowDialog();
             if (result == true)
             {
-                return _saveFdialog.FileName;
+                if (Users != null && Users.Count > 0)
+                {
+                    File.WriteAllText(_saveFdialog.FileName, JsonSerializer.Serialize(Users, jso));
+                    return true;
+                }
+                else Debug.WriteLine("Список не схранён");
             }
-            return string.Empty;
+            return false;
         }
     }
 }

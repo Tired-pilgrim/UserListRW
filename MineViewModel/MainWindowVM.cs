@@ -33,7 +33,7 @@ namespace ViewModel
                           string.IsNullOrWhiteSpace(user.Job)));
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
         }
-        public void OpenListUser(string puth) => mineModel.OpenList(puth);
+        public void OpenListUser(ObservableCollection<User> users) => mineModel.OpenList(users);
         public void SaveListUser(string puth) => mineModel.SaveList(puth);
         // Только для режима разработки
         //public MainViewModel()
