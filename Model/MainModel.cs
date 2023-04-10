@@ -11,6 +11,7 @@ namespace Model
 {
     public class MainModel
     {
+        //Вторая ветвь
         public ObservableCollection<User>? Users { get; private set; }
         private ObservableCollection<User> privateUsers { get; } = new()
         {
