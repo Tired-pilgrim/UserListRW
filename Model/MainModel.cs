@@ -14,15 +14,15 @@ namespace Model
         public ObservableCollection<User>? Users { get; private set; }
         private ObservableCollection<User> privateUsers { get; } = new()
         {
-            new User { Name = "Вася", Family = "Васильев", Job="Студент" },
-            new User { Name = "Николай", Family = "Алексеев", Job="Аспирант"},
-            new User { Name = "Сидор", Family = "Сидоров", Job="Ректор" }
+            //new User { Name = "Вася", Family = "Васильев", Job="Студент" },
+            //new User { Name = "Николай", Family = "Алексеев", Job="Аспирант"},
+            //new User { Name = "Сидор", Family = "Сидоров", Job="Ректор" }
         };
         public event EventHandler? NewUserList;
         private readonly JsonSerializerOptions jso;
         public MainModel()
         {
-            //Users = new(privateUsers);
+            Users = new(privateUsers);
             jso = new JsonSerializerOptions
             {
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)

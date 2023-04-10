@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using ViewModel;
+using ViewModelLib.Commands;
 
 namespace Views.Windows
 {
@@ -20,11 +21,15 @@ namespace Views.Windows
                     _addUzer.ShowDialog();
                 }
             };
-        public static RoutedEventHandler OpenListUserDialog { get; } = (s, _) =>
+        //public static RoutedEventHandler OpenListUserDialog { get; } = (s, _) =>
+        //{
+        //    Window? currWin = Window.GetWindow((Button)s);
+        //    ((MainViewModel)currWin.DataContext).OpenListUser(OpenSaveHelper.OpenDial());
+        //};
+        public static RelayCommand<MainViewModel> OpenListUserDialog { get; } = new RelayCommand<MainViewModel>(vm =>
         {
-            Window? currWin = Window.GetWindow((Button)s);
-            ((MainViewModel)currWin.DataContext).OpenListUser(OpenSaveHelper.OpenDial());
-        };
+            vm.OpenListUser(OpenSaveHelper.OpenDial());
+        });
     }
-    }
+ }
 

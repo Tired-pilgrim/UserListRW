@@ -10,7 +10,6 @@
         Title="Добавить" Height="250" Width="300"
         >
     <Window.Resources>
-        <vm:MainViewModel x:Key="vm"/>
         <data:User x:Key="user"/>
     </Window.Resources>
     <StackPanel>
