@@ -9,14 +9,6 @@ namespace ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        //protected override void OnPropertyChanged(string? PropertyName)
-        //{
-        //    base.OnPropertyChanged(PropertyName);
-        //    if (PropertyName == nameof(Path) && !string.IsNullOrEmpty(Path))
-        //    {
-        //        if (Path != string.Empty) mineModel.OpenList(Path);
-        //    }
-        //}
         private string _message = string.Empty;
         public string Message
         {
@@ -41,13 +33,17 @@ namespace ViewModel
         }
         public async Task OpenListUserAsync(ObservableCollection<User> users)
         {
-            if (users != null) mineModel.OpenList(users);
+            if (users != null)
+            {
+                mineModel.OpenList(users);
+                Message = "Открыт новый список";
+            } 
             else
             {
-                Message = "Список не загружен";
-                await Task.Delay(3000);
-                Message = string.Empty;
+                Message = "Список  НЕ загружен";                
             }
+            await Task.Delay(3000);
+            Message = string.Empty;
         }
         public async Task SaveListUser(bool Success)
         {

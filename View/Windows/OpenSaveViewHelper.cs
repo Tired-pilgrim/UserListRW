@@ -1,23 +1,27 @@
 ﻿using Microsoft.Win32;
 using ModelLib;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Views.Windows
 {
-    public static class OpenSaveHelper
+    public class OpenSaveViewHelper
     {
-        static OpenFileDialog _openFdialog;
-        static SaveFileDialog _saveFdialog;
-        static readonly string ListFolder = Environment.CurrentDirectory + @"\Списки\";
-        static readonly JsonSerializerOptions jso;
-        static OpenSaveHelper()
+        private OpenFileDialog _openFdialog;
+        private SaveFileDialog _saveFdialog;
+        private readonly string ListFolder = Environment.CurrentDirectory + @"\Списки\";
+        private readonly JsonSerializerOptions jso;
+        public OpenSaveViewHelper()
         {
             Directory.CreateDirectory(ListFolder);
             _openFdialog = new()
@@ -40,7 +44,7 @@ namespace Views.Windows
             };
         }
 
-        public static ObservableCollection<User>? OpenDial()
+        public  ObservableCollection<User>? OpenDial()
         {
             bool? result = _openFdialog.ShowDialog();
             if (result == true)
@@ -62,12 +66,8 @@ namespace Views.Windows
             return null;
         }
 
-        static void ShowMessage(string message)
-        {
-            MessageBox.Show(message, "Ошибка");
-        }
 
-        public static bool  SaveDial(ObservableCollection<User> Users)
+        public  bool SaveDial(ObservableCollection<User> Users)
         {
             bool? result = _saveFdialog.ShowDialog();
             if (result == true)
@@ -81,5 +81,11 @@ namespace Views.Windows
             }
             return false;
         }
+
+        private void ShowMessage(string message)
+        {
+            MessageBox.Show(message, "Ошибка");
+        }
     }
 }
+
