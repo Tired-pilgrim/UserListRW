@@ -4,17 +4,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ViewLib="clr-namespace:ViewLib;assembly=ViewLib"
-        xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
-        xmlns:data="clr-namespace:ModelLib;assembly=ModelLib"
         mc:Ignorable="d"
         Title="Добавить" Height="250" Width="300"
         >
-    <Window.Resources>
-        <data:User x:Key="user"/>
-    </Window.Resources>
     <StackPanel>
-        <StackPanel Orientation="Vertical" VerticalAlignment="Top"
-                DataContext="{DynamicResource user}">
+        <StackPanel Orientation="Vertical" VerticalAlignment="Top">
             <TextBlock Text="Имя" FontSize="16" HorizontalAlignment="Center"/>
             <TextBox FontSize="16" HorizontalAlignment="Center" Width="200" Margin="0 0 0 10"
                      Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
@@ -27,8 +21,7 @@
         </StackPanel>
         <UniformGrid Rows="1" Margin="20">
             <ViewLib:MyCloseBut Content="Добавить" Width="60" HorizontalAlignment="Center"
-                        Command="{Binding AddUserCommand}"
-                                CommandParameter="{DynamicResource user}"/>
+                        Command="{Binding AddUserCommand}"/>
             <ViewLib:MyCloseBut Content="Отмена" Width="60" HorizontalAlignment="Center"/>
         </UniformGrid>
     </StackPanel>

@@ -23,12 +23,15 @@ namespace ViewModel
         {
             this.mineModel = mineModel;
             mineModel.NewUserList += (s, e) => OnPropertyChanged(nameof(Users));
-            AddUserCommand = new RelayCommand<User>
-            (
-                user => mineModel.AddUzer(user),
-                user => !(string.IsNullOrWhiteSpace(user.Name) ||
-                          string.IsNullOrWhiteSpace(user.Family) ||
-                          string.IsNullOrWhiteSpace(user.Job)));
+            AddUserCommand = new RelayCommand(
+                () =>
+                {
+                    User user = new User { Name = this.Name, Family = this.Family, Job = this.Job };
+                    mineModel.AddUzer(user);
+                },
+                () => !(string.IsNullOrWhiteSpace(Name) ||
+                          string.IsNullOrWhiteSpace(Family) ||
+                          string.IsNullOrWhiteSpace(Job)));
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
         }
         public async Task OpenListUserAsync(ObservableCollection<User> users)
@@ -40,7 +43,7 @@ namespace ViewModel
             } 
             else
             {
-                Message = "Список  НЕ загружен";                
+                Message = "Список НЕ загружен";                
             }
             await Task.Delay(3000);
             Message = string.Empty;
@@ -58,11 +61,24 @@ namespace ViewModel
             await Task.Delay(3000);
             Message = string.Empty;
         }
-        // Только для режима разработки
-        //public MainViewModel()
-        //{
-        //    mineModel = new();
-        //    AddUserCommand = new RelayCommand(() => { });
-        //}
+        private string _name = string.Empty;
+        public string Name
+        {
+            get => _name;
+            set => Set(ref _name, ref value);
+        }
+
+        private string _family = string.Empty;
+        public string Family
+        {
+            get => _family;
+            set => Set(ref _family, ref value);
+        }
+        private string _job = string.Empty;
+        public string Job
+        {
+            get => _job;
+            set => Set(ref _job, ref value);
+        }
     }
 }
