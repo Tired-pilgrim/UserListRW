@@ -7,8 +7,8 @@ namespace Views.Windows
 {
     public  class ViewHelper
     {
-        private static OpenSaveViewHelper _OSHelper;
-        public ViewHelper(OpenSaveViewHelper OSHelper)
+        private static OpenSaveAppHelper _OSHelper;
+        public ViewHelper(OpenSaveAppHelper OSHelper)
         {
             _OSHelper = OSHelper;
         }

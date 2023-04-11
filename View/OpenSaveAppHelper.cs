@@ -9,15 +9,15 @@ using System.Text.Json;
 using System.Text.Unicode;
 using System.Windows;
 
-namespace Views.Windows
+namespace Views
 {
-    public class OpenSaveViewHelper
+    public class OpenSaveAppHelper
     {
         private OpenFileDialog _openFdialog;
         private SaveFileDialog _saveFdialog;
         private readonly string ListFolder = Environment.CurrentDirectory + @"\Списки\";
         private readonly JsonSerializerOptions jso;
-        public OpenSaveViewHelper()
+        public OpenSaveAppHelper()
         {
             Directory.CreateDirectory(ListFolder);
             _openFdialog = new()
@@ -40,7 +40,7 @@ namespace Views.Windows
             };
         }
 
-        public  ObservableCollection<User>? OpenDial()
+        public ObservableCollection<User>? OpenDial()
         {
             bool? result = _openFdialog.ShowDialog();
             if (result == true)
@@ -63,7 +63,7 @@ namespace Views.Windows
         }
 
 
-        public  bool SaveDial(ObservableCollection<User> Users)
+        public bool SaveDial(ObservableCollection<User> Users)
         {
             bool? result = _saveFdialog.ShowDialog();
             if (result == true)
