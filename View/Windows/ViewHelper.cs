@@ -28,11 +28,11 @@ namespace Views.Windows
         //};
         public static RelayCommand<MainViewModel> OpenListUserDialog { get; } = new RelayCommand<MainViewModel>(vm =>
         {
-            vm.OpenListUser(OpenSaveHelper.OpenDial());
+            vm.OpenListUserAsync(OpenSaveHelper.OpenDial());
         });
         public static RelayCommand<MainViewModel>  SaveListUserDialog { get; } = new RelayCommand<MainViewModel>(vm =>
         {
-            _ = OpenSaveHelper.SaveDial(vm.Users);
+             vm.SaveListUser(OpenSaveHelper.SaveDial(vm.Users));
         });
     }
  }

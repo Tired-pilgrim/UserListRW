@@ -32,6 +32,11 @@
                         Command="{Binding RemoveUserCommand}"
                         CommandParameter="{Binding ElementName=MyLV, Path=SelectedItem}"/>
             </StackPanel>
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem>
+                    <TextBlock Text="{Binding Message}"/>
+                </StatusBarItem>
+            </StatusBar>
             <ListView x:Name="MyLV" ItemsSource="{Binding Users}" FontSize="16" DockPanel.Dock="Bottom"
                       SelectedIndex="{Binding SelectedUser}">
                 <ListView.View>
@@ -42,6 +47,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+            
         </DockPanel>
     </Grid>
 </Window>

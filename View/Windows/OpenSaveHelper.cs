@@ -7,7 +7,7 @@ using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-using System.Windows.Shapes;
+using System.Windows;
 
 namespace Views.Windows
 {
@@ -48,16 +48,25 @@ namespace Views.Windows
                 string StrJson = File.ReadAllText(_openFdialog.FileName);
                 if (!string.IsNullOrEmpty(StrJson))
                 {
-                    return JsonSerializer.Deserialize<ObservableCollection<User>>(StrJson);
+                    try
+                    {
+                        return JsonSerializer.Deserialize<ObservableCollection<User>>(StrJson);
+                    }
+                    catch (JsonException)
+                    {
+                        ShowMessage("Не правильный формат списка");
+                        return null;
+                    }
                 }
-                else Debug.WriteLine("Список не загружен");
             }
-            else Debug.WriteLine("Список не загружен");
             return null;
         }
-            
-   
-    
+
+        static void ShowMessage(string message)
+        {
+            MessageBox.Show(message, "Ошибка");
+        }
+
         public static bool  SaveDial(ObservableCollection<User> Users)
         {
             bool? result = _saveFdialog.ShowDialog();

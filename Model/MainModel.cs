@@ -36,14 +36,14 @@ namespace Model
             NewUserList?.Invoke(this, EventArgs.Empty);
         }
 
-        public void SaveList(string path)
-        {
-            //if (Users != null && Users.Count > 0 && !string.IsNullOrEmpty(path))
-            //{
-            //    File.WriteAllText(path, JsonSerializer.Serialize(Users, jso));
-            //}
-            //else Debug.WriteLine("Список не схранён");
-        }
+        //public void SaveList(string path)
+        //{
+        //    if (Users != null && Users.Count > 0 && !string.IsNullOrEmpty(path))
+        //    {
+        //        File.WriteAllText(path, JsonSerializer.Serialize(Users, jso));
+        //    }
+        //    else Debug.WriteLine("Список не схранён");
+        //}
     }
 
 }
