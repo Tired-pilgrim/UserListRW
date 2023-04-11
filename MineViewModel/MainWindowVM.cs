@@ -33,7 +33,7 @@ namespace ViewModel
                           string.IsNullOrWhiteSpace(Family) ||
                           string.IsNullOrWhiteSpace(Job)));
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
-        }
+        } 
         public async Task OpenListUserAsync(ObservableCollection<User> users)
         {
             if (users != null)

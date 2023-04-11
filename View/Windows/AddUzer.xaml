@@ -6,7 +6,7 @@
         xmlns:ViewLib="clr-namespace:ViewLib;assembly=ViewLib"
         mc:Ignorable="d"
         Title="Добавить" Height="250" Width="300"
-        >
+        > 
     <StackPanel>
         <StackPanel Orientation="Vertical" VerticalAlignment="Top">
             <TextBlock Text="Имя" FontSize="16" HorizontalAlignment="Center"/>
