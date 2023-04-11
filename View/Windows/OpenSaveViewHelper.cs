@@ -1,16 +1,12 @@
 ﻿using Microsoft.Win32;
 using ModelLib;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Unicode;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Views.Windows

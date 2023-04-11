@@ -26,11 +26,6 @@ namespace Views.Windows
                     _addUzer.ShowDialog();
                 }
             };
-        //public static RoutedEventHandler OpenListUserDialog { get; } = (s, _) =>
-        //{
-        //    Window? currWin = Window.GetWindow((Button)s);
-        //    ((MainViewModel)currWin.DataContext).OpenListUser(OpenSaveHelper.OpenDial());
-        //};
         public static RelayCommand<MainViewModel> OpenListUserDialog { get; } = new RelayCommand<MainViewModel>(vm =>
         {
             vm.OpenListUserAsync(_OSHelper.OpenDial());
