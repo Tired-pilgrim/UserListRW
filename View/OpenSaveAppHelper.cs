@@ -40,7 +40,7 @@ namespace Views
             };
         }
 
-        public ObservableCollection<User>? OpenDial()
+        public ObservableCollection<User> OpenDial()
         {
             bool? result = _openFdialog.ShowDialog();
             if (result == true)

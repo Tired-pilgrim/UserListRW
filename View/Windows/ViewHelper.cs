@@ -7,7 +7,7 @@ namespace Views.Windows
 {
     public  class ViewHelper
     {
-        private static OpenSaveAppHelper _OSHelper;
+        private static OpenSaveAppHelper? _OSHelper;
         public ViewHelper(OpenSaveAppHelper OSHelper)
         {
             _OSHelper = OSHelper;
@@ -19,7 +19,7 @@ namespace Views.Windows
                 {
                     AddUzer _addUzer = new AddUzer()
                     {
-                        DataContext = currWin.DataContext,
+                        DataContext = ((MainViewModel)currWin.DataContext).AddUserVM,
                         Owner = currWin,
                         WindowStartupLocation = WindowStartupLocation.CenterOwner
                     };
@@ -28,11 +28,11 @@ namespace Views.Windows
             };
         public static RelayCommand<MainViewModel> OpenListUserDialog { get; } = new RelayCommand<MainViewModel>(vm =>
         {
-            vm.OpenListUserAsync(_OSHelper.OpenDial());
+            if (_OSHelper != null) _ = vm.OpenListUserAsync(_OSHelper.OpenDial());
         });
         public static RelayCommand<MainViewModel>  SaveListUserDialog { get; } = new RelayCommand<MainViewModel>(vm =>
         {
-             vm.SaveListUser(_OSHelper.SaveDial(vm.Users));
+            if (vm.Users != null && _OSHelper != null) _ =vm.SaveListUser(_OSHelper.SaveDial(vm.Users));
         });
     }
  }
