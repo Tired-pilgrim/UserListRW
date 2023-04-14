@@ -24,8 +24,7 @@ namespace ViewModel
         {
             AddUserVM = new(mineModel);
             this.mineModel = mineModel;
-            mineModel.NewUserList += (s, e) => OnPropertyChanged(nameof(Users));
-            
+            mineModel.NewUserList += (s, e) => OnPropertyChanged(nameof(Users));            
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
         } 
         public async Task OpenListUserAsync(ObservableCollection<User> users)
