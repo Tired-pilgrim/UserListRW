@@ -27,7 +27,7 @@ namespace ViewModel
             mineModel.NewUserList += (s, e) => OnPropertyChanged(nameof(Users));            
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
         } 
-        public async Task OpenListUserAsync(ObservableCollection<User> users)
+        public async Task OpenListUserAsync(ObservableCollection<User> ?users)
         {
             if (users != null)
             {
