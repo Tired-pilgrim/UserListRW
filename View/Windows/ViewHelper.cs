@@ -32,7 +32,7 @@ namespace Views.Windows
         });
         public static RelayCommand<MainViewModel>  SaveListUserDialog { get; } = new RelayCommand<MainViewModel>(vm =>
         {
-            if (vm.Users != null && _OSHelper != null) _ =vm.SaveListUser(_OSHelper.SaveDial(vm.Users));
+           // if (vm.Users != null && _OSHelper != null) _ =vm.SaveListUser(_OSHelper.SaveDial(vm.Users));
         });
     }
  }
