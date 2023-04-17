@@ -1,8 +1,6 @@
 ﻿using Model;
 using ModelLib;
-using System;
-using System.Collections.ObjectModel;
-using System.IO.Packaging;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VievModelLib;
 using ViewModelLib.Commands;
@@ -21,7 +19,7 @@ namespace ViewModel
         private readonly MainModel mineModel;
        
         public RelayCommand RemoveUserCommand { get; }
-        public ReadOnlyObservableCollection<User>? Users => mineModel.Users;
+        public IEnumerable<User>? Users => mineModel.Users;
         public MainViewModel(MainModel mineModel)
         {
             AddUserVM = new(mineModel);

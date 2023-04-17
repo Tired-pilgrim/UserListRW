@@ -1,9 +1,8 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.IO;
-using System.Windows;
 
-namespace Views
+namespace Views.Windows
 {
     public class OpenSaveAppHelper
     {
@@ -29,12 +28,12 @@ namespace Views
             };
         }
 
-        public string  OpenDial()
+        public string OpenDial()
         {
             bool? result = _openFdialog.ShowDialog();
             if (result == true)
             {
-               return _openFdialog.FileName;
+                return _openFdialog.FileName;
             }
             return string.Empty;
         }
@@ -50,10 +49,6 @@ namespace Views
             return string.Empty;
         }
 
-        private void ShowMessage(string message)
-        {
-            MessageBox.Show(message, "Ошибка");
-        }
     }
 }
 
