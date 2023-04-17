@@ -1,6 +1,8 @@
 ﻿using Model;
 using ModelLib;
+using System;
 using System.Collections.ObjectModel;
+using System.IO.Packaging;
 using System.Threading.Tasks;
 using VievModelLib;
 using ViewModelLib.Commands;
@@ -24,15 +26,14 @@ namespace ViewModel
         {
             AddUserVM = new(mineModel);
             this.mineModel = mineModel;
-           // mineModel.NewUserList += (s, e) => OnPropertyChanged(nameof(Users));            
+            mineModel.Message += (_, e) => Message = e;
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
         } 
-        public async Task OpenListUserAsync(ObservableCollection<User> ?users)
+        public async Task OpenListUserAsync(string puth)
         {
-            if (users != null)
+            if (!string.IsNullOrWhiteSpace(puth))
             {
-                mineModel.OpenList(users);
-                Message = "Открыт новый список";
+                mineModel.OpenList(puth);
             } 
             else
             {
@@ -41,10 +42,11 @@ namespace ViewModel
             await Task.Delay(3000);
             Message = string.Empty;
         }
-        public async Task SaveListUser(bool Success)
+        public async Task SaveListUser(string putn)
         {
-            if (Success)
+            if (!string.IsNullOrWhiteSpace(putn))
             {
+                mineModel.SaveList(putn);
                 Message = "Список сохранён";
             }
             else

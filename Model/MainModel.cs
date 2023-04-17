@@ -1,6 +1,10 @@
 ﻿using ModelLib;
+using System;
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
+using System.Text.Json;
 
 namespace Model
 {
@@ -18,20 +22,60 @@ namespace Model
         {
             Users = new(privateUsers);
         }
-
-        public void AddUzer(User user) => privateUsers.Add(user);
-        public void RemoveUzer(User user) => privateUsers.Remove(user);
-        public void OpenList(ObservableCollection<User> users)
+        public event EventHandler<string>? Message;
+        public void AddUzer(User user)
         {
             lock (((ICollection)privateUsers).SyncRoot)
+                privateUsers.Add(user);
+        }
+        public void RemoveUzer(User user)
+        {
+            lock (((ICollection)privateUsers).SyncRoot)
+                privateUsers.Remove(user);
+        }
+        public void OpenList(string path)
+        {
+            if (!string.IsNullOrEmpty(path))
             {
-                privateUsers.Clear();
-                foreach (User user in users)
+                string StrJson = File.ReadAllText(path);
+                if (!string.IsNullOrEmpty(StrJson))
                 {
-                    privateUsers.Add(user);
+                    lock (((ICollection)privateUsers).SyncRoot)
+                    {
+                        User[]? users = null;
+                        try
+                        {
+                           users = JsonSerializer.Deserialize<User[]>(StrJson);
+                            privateUsers.Clear();
+                            if (users != null)
+                            {
+                                foreach (User user in users)
+                                {
+                                    privateUsers.Add(user);
+                                }
+                                Message?.Invoke(this, "Открыт новый список");
+                            }
+                        }
+                        catch
+                        {
+                            Message?.Invoke(this, "Не удалось открыть список");
+                        }                       
+                    }
                 }
             }
         }
-    }
+        public void SaveList(string path)
+        {
+            if (privateUsers.Count > 0) 
+            {
+                lock (((ICollection)privateUsers).SyncRoot)
+                {
+                    string StrJson = JsonSerializer.Serialize(privateUsers);
+                    File.WriteAllText(path, StrJson);
+                }
+            }
+        }
+
+     }
 
 }
