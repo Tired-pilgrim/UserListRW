@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 
@@ -41,10 +42,9 @@ namespace Model
                 {
                     lock (((ICollection)privateUsers).SyncRoot)
                     {
-                        User[]? users = null;
                         try
                         {
-                           users = JsonSerializer.Deserialize<User[]>(StrJson);
+                            User[]? users = JsonSerializer.Deserialize<User[]>(StrJson);
                             privateUsers.Clear();
                             if (users != null)
                             {

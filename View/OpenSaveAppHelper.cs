@@ -6,8 +6,8 @@ namespace Views.Windows
 {
     public class OpenSaveAppHelper
     {
-        private static OpenFileDialog _openFdialog;
-        private static SaveFileDialog _saveFdialog;
+        private static OpenFileDialog? _openFdialog;
+        private static SaveFileDialog? _saveFdialog;
         private readonly string ListFolder = Environment.CurrentDirectory + @"\Списки\";
         public OpenSaveAppHelper()
         {
@@ -30,10 +30,10 @@ namespace Views.Windows
 
         public static string OpenDial()
         {
-            bool? result = _openFdialog.ShowDialog();
-            if (result == true)
+            if (_openFdialog != null && _openFdialog.ShowDialog() == true)
             {
-                return _openFdialog.FileName;
+               return _openFdialog.FileName;
+               
             }
             return string.Empty;
         }
@@ -41,8 +41,7 @@ namespace Views.Windows
 
         public static string SaveDial()
         {
-            bool? result = _saveFdialog.ShowDialog();
-            if (result == true)
+            if (_saveFdialog != null && _saveFdialog.ShowDialog() == true)
             {
                 return _saveFdialog.FileName;
             }
