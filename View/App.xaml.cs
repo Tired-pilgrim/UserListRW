@@ -13,7 +13,7 @@ namespace View
     {
         public App()
         {
-            new ViewHelper(new OpenSaveAppHelper());
+           new OpenSaveAppHelper();
             MainModel _mainModel = new MainModel();
             MainViewModel vm = new(_mainModel);
             MainWindow _mainWindow = new MainWindow() { DataContext = vm };
