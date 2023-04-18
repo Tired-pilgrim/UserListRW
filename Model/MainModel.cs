@@ -1,6 +1,7 @@
 ﻿using ModelLib;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
@@ -17,12 +18,13 @@ namespace Model
             new User { Name = "Николай", Family = "Алексеев", Job="Аспирант"},
             new User { Name = "Сидор", Family = "Сидоров", Job="Ректор" }
         };
-
+        public Repository repository { get; }
         public MainModel()
         {
             Users = new(privateUsers);
+            repository = new Repository(this);
         }
-        public event EventHandler<string>? Message;
+        //public event EventHandler<string>? Message;
         public void AddUzer(User user)
         {
             lock (((ICollection)privateUsers).SyncRoot)
@@ -33,34 +35,11 @@ namespace Model
             lock (((ICollection)privateUsers).SyncRoot)
                 privateUsers.Remove(user);
         }
-        public void OpenList(string path)
+        public void OpenList(User[] users)
         {
-            if (!string.IsNullOrEmpty(path))
+            foreach (User user in users)
             {
-                string StrJson = File.ReadAllText(path);
-                if (!string.IsNullOrEmpty(StrJson))
-                {
-                    lock (((ICollection)privateUsers).SyncRoot)
-                    {
-                        try
-                        {
-                            User[]? users = JsonSerializer.Deserialize<User[]>(StrJson);
-                            privateUsers.Clear();
-                            if (users != null)
-                            {
-                                foreach (User user in users)
-                                {
-                                    privateUsers.Add(user);
-                                }
-                                Message?.Invoke(this, "Открыт новый список");
-                            }
-                        }
-                        catch
-                        {
-                            Message?.Invoke(this, "Не удалось открыть список");
-                        }                       
-                    }
-                }
+                privateUsers.Add(user);
             }
         }
         public void SaveList(string path)

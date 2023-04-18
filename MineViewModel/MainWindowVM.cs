@@ -24,14 +24,14 @@ namespace ViewModel
         {
             AddUserVM = new(mineModel);
             this.mineModel = mineModel;
-            mineModel.Message += (_, e) => Message = e;
+            mineModel.repository.Message += (_, e) => Message = e;
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
         } 
         public async Task OpenListUserAsync(string puth)
         {
             if (!string.IsNullOrWhiteSpace(puth))
             {
-                mineModel.OpenList(puth);
+                mineModel.repository.GetUser(puth);
             } 
             else
             {
