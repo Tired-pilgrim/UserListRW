@@ -12,20 +12,20 @@ namespace Views.Windows
         {
             _OSHelper = OSHelper;
         }
-            public static RoutedEventHandler AddUserDialog { get; } = (s, _) =>
+        public static RoutedEventHandler AddUserDialog { get; } = (s, _) =>
+        {
+            Window? currWin = Window.GetWindow((Button)s);
+            if (currWin.DataContext != null)
             {
-                Window? currWin = Window.GetWindow((Button)s);
-                if (currWin.DataContext != null)
+                AddUzer _addUzer = new AddUzer()
                 {
-                    AddUzer _addUzer = new AddUzer()
-                    {
-                        DataContext = ((MainViewModel)currWin.DataContext).AddUserVM,
-                        Owner = currWin,
-                        WindowStartupLocation = WindowStartupLocation.CenterOwner
-                    };
-                    _addUzer.ShowDialog();
-                }
-            };
+                    DataContext = ((MainViewModel)currWin.DataContext).AddUserVM,
+                    Owner = currWin,
+                    WindowStartupLocation = WindowStartupLocation.CenterOwner
+                };
+                _addUzer.ShowDialog();
+            }
+        };
         public static RelayCommand<MainViewModel> OpenListUserDialog { get; } = new RelayCommand<MainViewModel>(vm =>
         {
             if (_OSHelper != null) _ = vm.OpenListUserAsync(_OSHelper.OpenDial());

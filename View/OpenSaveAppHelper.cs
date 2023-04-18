@@ -6,8 +6,8 @@ namespace Views.Windows
 {
     public class OpenSaveAppHelper
     {
-        private static OpenFileDialog _openFdialog;
-        private static SaveFileDialog _saveFdialog;
+        private static OpenFileDialog ?_openFdialog;
+        private static SaveFileDialog ?_saveFdialog;
         private readonly string ListFolder = Environment.CurrentDirectory + @"\Списки\";
         public OpenSaveAppHelper()
         {
