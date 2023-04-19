@@ -37,8 +37,7 @@
                     <TextBlock Text="{Binding Message}"/>
                 </StatusBarItem>
             </StatusBar>
-            <ListView x:Name="MyLV" ItemsSource="{Binding Users}" FontSize="16" DockPanel.Dock="Bottom"
-                      SelectedIndex="{Binding SelectedUser}">
+            <ListView x:Name="MyLV" ItemsSource="{Binding Users}" FontSize="16" DockPanel.Dock="Bottom">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Имя" Width="200" DisplayMemberBinding="{Binding Name}"/>
