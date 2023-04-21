@@ -1,7 +1,6 @@
 ﻿using Model;
 using System.Windows;
 using ViewModel;
-using Views;
 using Views.Windows;
 
 namespace View
@@ -13,7 +12,6 @@ namespace View
     {
         public App()
         {
-            // ViewHelper(new OpenSaveAppHelper());
             MainModel _mainModel = new MainModel();
             MainViewModel vm = new(_mainModel, new OpenSaveWiewHelper());
             MainWindow _mainWindow = new MainWindow() { DataContext = vm };
