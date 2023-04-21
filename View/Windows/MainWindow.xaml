@@ -7,12 +7,6 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="450" Width="800">
-    <!--<d:Window.DataContext>
-        <vm:MainViewModel/>
-    </d:Window.DataContext>-->
-    <!--<Window.Resources>
-        <View:SelectedIndexToBoolConverter x:Key="SelectedIndexToBool"/>
-    </Window.Resources>-->
     <Grid>
         <DockPanel  LastChildFill="True">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
