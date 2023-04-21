@@ -23,10 +23,8 @@ namespace ViewModel
         public RelayCommand OpenDialogCommand { get; }
         public RelayCommand SaveDialogCommand { get; }
         public IEnumerable<User>? Users => mineModel.Users;
-        //private IOpenSave _openSave;
         public MainViewModel(MainModel mineModel, IOpenSave openSave)
         {
-              
             AddUserVM = new(mineModel);
             this.mineModel = mineModel;
             mineModel.Message += (_, e) => Message = e;
