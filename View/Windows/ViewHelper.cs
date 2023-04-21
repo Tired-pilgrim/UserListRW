@@ -7,11 +7,6 @@ namespace Views.Windows
 {
     public  class ViewHelper
     {
-        private static OpenSaveAppHelper? _OSHelper;
-        public ViewHelper(OpenSaveAppHelper OSHelper)
-        {
-            _OSHelper = OSHelper;
-        }
         public static RoutedEventHandler AddUserDialog { get; } = (s, _) =>
         {
             Window? currWin = Window.GetWindow((Button)s);

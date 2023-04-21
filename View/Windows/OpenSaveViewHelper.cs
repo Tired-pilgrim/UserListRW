@@ -1,15 +1,16 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.IO;
+using ViewLib;
 
 namespace Views.Windows
 {
-    public class OpenSaveAppHelper
+    public class OpenSaveWiewHelper: IOpenSave
     {
         private static OpenFileDialog ?_openFdialog;
         private static SaveFileDialog ?_saveFdialog;
         private readonly string ListFolder = Environment.CurrentDirectory + @"\Списки\";
-        public OpenSaveAppHelper()
+        public OpenSaveWiewHelper()
         {
             Directory.CreateDirectory(ListFolder);
             _openFdialog = new()

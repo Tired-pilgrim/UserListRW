@@ -3,6 +3,7 @@ using ModelLib;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VievModelLib;
+using ViewLib;
 using ViewModelLib.Commands;
 
 namespace ViewModel
@@ -19,13 +20,19 @@ namespace ViewModel
         private readonly MainModel mineModel;
        
         public RelayCommand RemoveUserCommand { get; }
+        public RelayCommand OpenDialogCommand { get; }
+        public RelayCommand SaveDialogCommand { get; }
         public IEnumerable<User>? Users => mineModel.Users;
-        public MainViewModel(MainModel mineModel)
+        //private IOpenSave _openSave;
+        public MainViewModel(MainModel mineModel, IOpenSave openSave)
         {
+              
             AddUserVM = new(mineModel);
             this.mineModel = mineModel;
             mineModel.Message += (_, e) => Message = e;
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
+            OpenDialogCommand = new RelayCommand(() => _ = OpenListUserAsync(openSave.OpenDial()));
+            SaveDialogCommand = new RelayCommand(() => _ = SaveListUser(openSave.SaveDial()));
         } 
         public async Task OpenListUserAsync(string puth)
         {
