@@ -5,13 +5,9 @@ using ViewModelLib.Commands;
 
 namespace Views.Windows
 {
-    public  class ViewHelper
+    public  class ViewHelper: OpenSaveViewHelper
     {
-        private static OpenSaveAppHelper? _OSHelper;
-        public ViewHelper(OpenSaveAppHelper OSHelper)
-        {
-            _OSHelper = OSHelper;
-        }
+        
         public static RoutedEventHandler AddUserDialog { get; } = (s, _) =>
         {
             Window? currWin = Window.GetWindow((Button)s);
@@ -28,11 +24,11 @@ namespace Views.Windows
         };
         public static RelayCommand<MainViewModel> OpenListUserDialog { get; } = new RelayCommand<MainViewModel>(vm =>
         {
-            if (_OSHelper != null) _ = vm.OpenListUserAsync(_OSHelper.OpenDial());
+            _ = vm.OpenListUserAsync(OpenDial());
         });
         public static RelayCommand<MainViewModel>  SaveListUserDialog { get; } = new RelayCommand<MainViewModel>(vm =>
         {
-            if (_OSHelper != null) _ = vm.SaveListUser(_OSHelper.SaveDial());
+            _ = vm.SaveListUser(SaveDial());
         });
     }
  }

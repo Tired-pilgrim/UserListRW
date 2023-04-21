@@ -1,16 +1,18 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace Views.Windows
 {
-    public class OpenSaveAppHelper
+    public class OpenSaveViewHelper
     {
         private static OpenFileDialog ?_openFdialog;
         private static SaveFileDialog ?_saveFdialog;
-        private readonly string ListFolder = Environment.CurrentDirectory + @"\Списки\";
-        public OpenSaveAppHelper()
+        private readonly static string ListFolder = Environment.CurrentDirectory + @"\Списки\";
+         static OpenSaveViewHelper()
         {
+            Debug.WriteLine(" Конструктор OpenSaveViewHelper сработал");
             Directory.CreateDirectory(ListFolder);
             _openFdialog = new()
             {
@@ -28,7 +30,7 @@ namespace Views.Windows
             };
         }
 
-        public string OpenDial()
+        public static string OpenDial()
         {
             if (_openFdialog != null && _openFdialog.ShowDialog() == true)
             {
@@ -39,7 +41,7 @@ namespace Views.Windows
         }
 
 
-        public string SaveDial()
+        public static string SaveDial()
         {
             if (_saveFdialog != null && _saveFdialog.ShowDialog() == true)
             {
