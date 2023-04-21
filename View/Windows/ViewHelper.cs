@@ -26,14 +26,7 @@ namespace Views.Windows
                 _addUzer.ShowDialog();
             }
         };
-        public static RelayCommand<MainViewModel> OpenListUserDialog { get; } = new RelayCommand<MainViewModel>(vm =>
-        {
-            if (_OSHelper != null) _ = vm.OpenListUserAsync(_OSHelper.OpenDial());
-        });
-        public static RelayCommand<MainViewModel>  SaveListUserDialog { get; } = new RelayCommand<MainViewModel>(vm =>
-        {
-            if (_OSHelper != null) _ = vm.SaveListUser(_OSHelper.SaveDial());
-        });
+       
     }
  }
 
