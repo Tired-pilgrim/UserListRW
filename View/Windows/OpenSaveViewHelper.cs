@@ -7,28 +7,23 @@ namespace Views.Windows
 {
     public class OpenSaveViewHelper
     {
-        private static OpenFileDialog ?_openFdialog;
-        private static SaveFileDialog ?_saveFdialog;
-        private readonly static string ListFolder = Environment.CurrentDirectory + @"\Списки\";
-         static OpenSaveViewHelper()
+        private static OpenFileDialog ?_openFdialog = new()
         {
-            Debug.WriteLine(" Конструктор OpenSaveViewHelper сработал");
-            Directory.CreateDirectory(ListFolder);
-            _openFdialog = new()
-            {
-                Filter = "Список сотрудников(*.json)|*.json| Все файлы (*.*)|*.*",
-                FileName = "Список сотрудников",
-                DefaultExt = ".json",
-                InitialDirectory = ListFolder
-            };
-            _saveFdialog = new()
-            {
-                Filter = "Список сотрудников(*.json)|*.json| Все файлы (*.*)|*.*",
-                FileName = "Список сотрудников",
-                DefaultExt = ".json",
-                InitialDirectory = ListFolder
-            };
-        }
+            Filter = "Список сотрудников(*.json)|*.json| Все файлы (*.*)|*.*",
+            FileName = "Список сотрудников",
+            DefaultExt = ".json",
+            InitialDirectory = ListFolder
+        };
+        private static SaveFileDialog ?_saveFdialog = new()
+        {
+            Filter = "Список сотрудников(*.json)|*.json| Все файлы (*.*)|*.*",
+            FileName = "Список сотрудников",
+            DefaultExt = ".json",
+            InitialDirectory = ListFolder
+        };
+        private readonly static string ListFolder = 
+            (Directory.CreateDirectory(Environment.CurrentDirectory + @"\Списки\")).ToString();
+       
 
         public static string OpenDial()
         {

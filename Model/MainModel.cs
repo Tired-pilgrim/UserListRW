@@ -19,7 +19,7 @@ namespace Model
         };
 
         public MainModel()
-        {
+        {            
             Users = new(privateUsers);
         }
         public event EventHandler<string>? Message;
