@@ -210,10 +210,11 @@ namespace Views.Windows
                 NewValue = newValue;
             }
         }
-        /// <inheritdoc cref="ValueProxy{T}"/>
-        public class ValueProxyObject : ValueProxy<object>
-        {
+        
+    }
+    /// <inheritdoc cref="ValueProxy{T}"/>
+    public class ValueProxy : ValueProxy<object>
+    {
 
-        }
     }
 }
