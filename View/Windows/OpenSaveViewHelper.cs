@@ -1,20 +1,19 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Diagnostics;
 using System.IO;
 
 namespace Views.Windows
 {
-    public class OpenSaveViewHelper
+    public static class OpenSaveViewHelper
     {
-        private static OpenFileDialog ?_openFdialog = new()
+        private static OpenFileDialog _openFdialog = new()
         {
             Filter = "Список сотрудников(*.json)|*.json| Все файлы (*.*)|*.*",
             FileName = "Список сотрудников",
             DefaultExt = ".json",
             InitialDirectory = ListFolder
         };
-        private static SaveFileDialog ?_saveFdialog = new()
+        private static SaveFileDialog _saveFdialog = new()
         {
             Filter = "Список сотрудников(*.json)|*.json| Все файлы (*.*)|*.*",
             FileName = "Список сотрудников",
@@ -27,7 +26,7 @@ namespace Views.Windows
 
         public static string OpenDial()
         {
-            if (_openFdialog != null && _openFdialog.ShowDialog() == true)
+            if (_openFdialog.ShowDialog() == true)
             {
                return _openFdialog.FileName;
                
@@ -38,7 +37,7 @@ namespace Views.Windows
 
         public static string SaveDial()
         {
-            if (_saveFdialog != null && _saveFdialog.ShowDialog() == true)
+            if (_saveFdialog.ShowDialog() == true)
             {
                 return _saveFdialog.FileName;
             }

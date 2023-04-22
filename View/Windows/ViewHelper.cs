@@ -2,12 +2,11 @@
 using System.Windows.Controls;
 using ViewModel;
 using ViewModelLib.Commands;
-
+using static Views.Windows.OpenSaveViewHelper;
 namespace Views.Windows
 {
-    public  class ViewHelper: OpenSaveViewHelper
+    public static class ViewHelper
     {
-        
         public static RoutedEventHandler AddUserDialog { get; } = (s, _) =>
         {
             Window? currWin = Window.GetWindow((Button)s);
