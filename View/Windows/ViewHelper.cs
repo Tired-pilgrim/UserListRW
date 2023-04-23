@@ -21,13 +21,13 @@ namespace Views.Windows
                 _addUzer.ShowDialog();
             }
         };
-        public static RelayCommand<ISaveOpen> OpenListUserDialog { get; } = new RelayCommand<ISaveOpen>(vm =>
+        public static RelayCommand<ISaveOpen> OpenListUserDialog { get; } = new RelayCommand<ISaveOpen>(Ivm =>
         {
-            _ = vm.OpenListUserAsync(OpenDial());
+            _ = Ivm.OpenListUserAsync(OpenDial());
         });
-        public static RelayCommand<ISaveOpen>  SaveListUserDialog { get; } = new RelayCommand<ISaveOpen>(vm =>
+        public static RelayCommand<ISaveOpen>  SaveListUserDialog { get; } = new RelayCommand<ISaveOpen>(Ivm =>
         {
-            _ = vm.SaveListUser(SaveDial());
+            _ = Ivm.SaveListUser(SaveDial());
         });
     }
  }
