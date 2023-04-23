@@ -7,9 +7,9 @@ namespace Views.Windows
 {
     public static class ViewHelper
     {
-        public static RoutedEventHandler AddUserDialog { get; } = (s, _) =>
+        public static RelayCommand<DependencyObject> AddUserDialog { get; } = new RelayCommand<DependencyObject>(dobj =>
         {
-            Window? currWin = Window.GetWindow((Button)s);
+            Window? currWin = Window.GetWindow(dobj);
             if (currWin.DataContext != null)
             {
                 AddUzer _addUzer = new AddUzer()
@@ -20,7 +20,7 @@ namespace Views.Windows
                 };
                 _addUzer.ShowDialog();
             }
-        };
+        });
         public static RelayCommand<ISaveOpen> OpenListUserDialog { get; } = new RelayCommand<ISaveOpen>(Ivm =>
         {
             _ = Ivm.OpenListUserAsync(OpenDial());
@@ -29,6 +29,7 @@ namespace Views.Windows
         {
             _ = Ivm.SaveListUser(SaveDial());
         });
+        
     }
  }
 
