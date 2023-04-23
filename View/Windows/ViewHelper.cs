@@ -21,11 +21,11 @@ namespace Views.Windows
                 _addUzer.ShowDialog();
             }
         };
-        public static RelayCommand<MainViewModel> OpenListUserDialog { get; } = new RelayCommand<MainViewModel>(vm =>
+        public static RelayCommand<ISaveOpen> OpenListUserDialog { get; } = new RelayCommand<ISaveOpen>(vm =>
         {
             _ = vm.OpenListUserAsync(OpenDial());
         });
-        public static RelayCommand<MainViewModel>  SaveListUserDialog { get; } = new RelayCommand<MainViewModel>(vm =>
+        public static RelayCommand<ISaveOpen>  SaveListUserDialog { get; } = new RelayCommand<ISaveOpen>(vm =>
         {
             _ = vm.SaveListUser(SaveDial());
         });

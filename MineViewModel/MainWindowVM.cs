@@ -7,7 +7,7 @@ using ViewModelLib.Commands;
 
 namespace ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase, ISaveOpen
     {
         private string _message = string.Empty;
         public string Message
@@ -27,11 +27,11 @@ namespace ViewModel
             mineModel.Message += (_, e) => Message = e;
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
         } 
-        public async Task OpenListUserAsync(string puth)
+        public async Task OpenListUserAsync(string path)
         {
-            if (!string.IsNullOrWhiteSpace(puth))
+            if (!string.IsNullOrWhiteSpace(path))
             {
-                mineModel.OpenList(puth);
+                mineModel.OpenList(path);
             } 
             else
             {
@@ -40,11 +40,11 @@ namespace ViewModel
             await Task.Delay(3000);
             Message = string.Empty;
         }
-        public async Task SaveListUser(string putn)
+        public async Task SaveListUser(string patn)
         {
-            if (!string.IsNullOrWhiteSpace(putn))
+            if (!string.IsNullOrWhiteSpace(patn))
             {
-                mineModel.SaveList(putn);
+                mineModel.SaveList(patn);
                 Message = "Список сохранён";
             }
             else
