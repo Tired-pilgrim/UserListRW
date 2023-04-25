@@ -1,17 +1,19 @@
 ﻿using ModelLib;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
+using System.Windows.Shapes;
 
 namespace Model
 {
     public class MainModel
     {
         public ReadOnlyObservableCollection<User> Users { get; }
-        private ObservableCollection<User> privateUsers { get; } = new()
+        public ObservableCollection<User> privateUsers { get; } = new()
         {
             new User { Name = "Вася", Family = "Васильев", Job="Студент" },
             new User { Name = "Николай", Family = "Алексеев", Job="Аспирант"},
@@ -19,7 +21,7 @@ namespace Model
         };
 
         public MainModel()
-        {            
+        {
             Users = new(privateUsers);
         }
         public event EventHandler<string>? Message;
@@ -39,10 +41,10 @@ namespace Model
             lock (((ICollection)privateUsers).SyncRoot)
             {
                 if (!string.IsNullOrEmpty(path))
-               {
+                {
                     string StrJson = File.ReadAllText(path);
                     if (!string.IsNullOrEmpty(StrJson))
-                    {                    
+                    {
                         try
                         {
                             User[]? users = JsonSerializer.Deserialize<User[]>(StrJson);
@@ -59,7 +61,33 @@ namespace Model
                         catch
                         {
                             Message?.Invoke(this, "Не удалось открыть список");
-                        }                       
+                        }
+                    }
+                }
+            }
+        }
+        public void OpenListConc(string path, ObservableCollection<User> UsersC)
+        {
+            if (!string.IsNullOrEmpty(path))
+            {
+                string StrJson = File.ReadAllText(path);
+                if (!string.IsNullOrEmpty(StrJson))
+                {
+                    try
+                    {
+                        User[]? users = JsonSerializer.Deserialize<User[]>(StrJson);
+                        UsersC.Clear();
+                        {
+                            foreach (User user in users)
+                            {
+                                UsersC.Add(user);
+                            }
+                            Message?.Invoke(this, "Открыт новый список");
+                        }
+                    }
+                    catch
+                    {
+                        Message?.Invoke(this, "Не удалось открыть список");
                     }
                 }
             }

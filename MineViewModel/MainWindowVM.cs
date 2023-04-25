@@ -1,9 +1,11 @@
 ﻿using Model;
 using ModelLib;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using VievModelLib;
 using ViewModelLib.Commands;
 
@@ -21,27 +23,32 @@ namespace ViewModel
         private readonly MainModel mineModel;
        
         public RelayCommand RemoveUserCommand { get; }
-        public IEnumerable<User>? Users => mineModel.Users;
+        public ObservableCollection<User> Users { get; set; } = new ObservableCollection<User>();
         public MainViewModel(MainModel mineModel)
         {
             AddUserVM = new(mineModel);
             this.mineModel = mineModel;
             mineModel.Message += (_, e) => Message = e;
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
+            object lockitems = new object();
+            BindingOperations.EnableCollectionSynchronization(Users, lockitems);
+
         }
-        public async Task OpenListUserAsync(string puth)
+        public async Task OpenListUserAsync(string path) => await Task.Run(() =>
         {
-            if (!string.IsNullOrWhiteSpace(puth))
+            
+            if (!string.IsNullOrWhiteSpace(path))
             {
-                mineModel.OpenList(puth);
+                //mineModel.OpenList(path);
+                mineModel.OpenListConc(path, Users);
             }
             else
             {
                 Message = "Список НЕ загружен";
             }
-            await Task.Delay(3000);
+            Thread.Sleep(3000);
             Message = string.Empty;
-        }
+        });
         public async Task SaveListUserAsync(string putn)
         {
             if (!string.IsNullOrWhiteSpace(putn))
