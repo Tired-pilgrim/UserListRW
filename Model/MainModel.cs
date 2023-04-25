@@ -36,13 +36,13 @@ namespace Model
         }
         public void OpenList(string path)
         {
-            if (!string.IsNullOrEmpty(path))
+            lock (((ICollection)privateUsers).SyncRoot)
             {
-                string StrJson = File.ReadAllText(path);
-                if (!string.IsNullOrEmpty(StrJson))
-                {
-                    lock (((ICollection)privateUsers).SyncRoot)
-                    {
+                if (!string.IsNullOrEmpty(path))
+               {
+                    string StrJson = File.ReadAllText(path);
+                    if (!string.IsNullOrEmpty(StrJson))
+                    {                    
                         try
                         {
                             User[]? users = JsonSerializer.Deserialize<User[]>(StrJson);

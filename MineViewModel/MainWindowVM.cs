@@ -56,5 +56,6 @@ namespace ViewModel
             await Task.Delay(3000);
             Message = string.Empty;
         }
+
     }
 }
