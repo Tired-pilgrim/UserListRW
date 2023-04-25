@@ -29,34 +29,32 @@ namespace ViewModel
             mineModel.Message += (_, e) => Message = e;
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
         }
-        public async Task OpenListUserAsync(string path) => await Task.Run(() =>
+        public async Task OpenListUserAsync(string puth)
         {
-            if (!string.IsNullOrWhiteSpace(path))
+            if (!string.IsNullOrWhiteSpace(puth))
             {
-                Debug.WriteLine("Путь к Файлу:" + path);
-                mineModel.OpenList(path);
+                mineModel.OpenList(puth);
             }
             else
             {
                 Message = "Список НЕ загружен";
             }
-            Thread.Sleep(3000);
+            await Task.Delay(3000);
             Message = string.Empty;
-        });
-        public async Task SaveListUserAsync(string patn) => await Task.Run(() =>
+        }
+        public async Task SaveListUserAsync(string putn)
         {
-            if (!string.IsNullOrWhiteSpace(patn))
+            if (!string.IsNullOrWhiteSpace(putn))
             {
-                mineModel.SaveList(patn);
+                mineModel.SaveList(putn);
                 Message = "Список сохранён";
             }
             else
             {
                 Message = "Список НЕ сохранён";
             }
-            Thread.Sleep(3000);
+            await Task.Delay(3000);
             Message = string.Empty;
-        });
-
+        }
     }
 }
