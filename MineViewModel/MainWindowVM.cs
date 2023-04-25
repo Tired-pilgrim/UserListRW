@@ -29,7 +29,7 @@ namespace ViewModel
             mineModel.Message += (_, e) => Message = e;
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
         }
-        public async Task OpenListUserAsync(string path)
+        public async Task OpenListUserAsync(string path) => await Task.Run(() =>
         {
             if (!string.IsNullOrWhiteSpace(path))
             {
