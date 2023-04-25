@@ -20,10 +20,9 @@ namespace ViewModel
             set => Set(ref _message, ref value);
         }
         public AddUserVM AddUserVM { get; }
-        private readonly MainModel mineModel;
-       
+        private readonly MainModel mineModel;       
         public RelayCommand RemoveUserCommand { get; }
-        public ObservableCollection<User> Users { get; set; } = new ObservableCollection<User>();
+        public ReadOnlyObservableCollection<User>? Users => mineModel.Users;
         public MainViewModel(MainModel mineModel)
         {
             AddUserVM = new(mineModel);
@@ -32,15 +31,12 @@ namespace ViewModel
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
             object lockitems = new object();
             BindingOperations.EnableCollectionSynchronization(Users, lockitems);
-
         }
         public async Task OpenListUserAsync(string path) => await Task.Run(() =>
-        {
-            
+        {            
             if (!string.IsNullOrWhiteSpace(path))
             {
-                //mineModel.OpenList(path);
-                mineModel.OpenListConc(path, Users);
+                mineModel.OpenList(path);
             }
             else
             {
@@ -49,20 +45,19 @@ namespace ViewModel
             Thread.Sleep(3000);
             Message = string.Empty;
         });
-        public async Task SaveListUserAsync(string putn)
+        public async Task SaveListUserAsync(string patn) => await Task.Run(() =>
         {
-            if (!string.IsNullOrWhiteSpace(putn))
+            if (!string.IsNullOrWhiteSpace(patn))
             {
-                mineModel.SaveList(putn);
+                mineModel.SaveList(patn);
                 Message = "Список сохранён";
             }
             else
             {
                 Message = "Список НЕ сохранён";
             }
-            await Task.Delay(3000);
+            Thread.Sleep(3000);
             Message = string.Empty;
-        }
-
+        });
     }
 }
