@@ -1,13 +1,15 @@
 ﻿using Model;
 using ModelLib;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using VievModelLib;
 using ViewModelLib.Commands;
 
 namespace ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase, ISaveOpen
     {
         private string _message = string.Empty;
         public string Message
@@ -26,34 +28,35 @@ namespace ViewModel
             this.mineModel = mineModel;
             mineModel.Message += (_, e) => Message = e;
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
-        } 
-        public async Task OpenListUserAsync(string puth)
+        }
+        public async Task OpenListUserAsync(string path)
         {
-            if (!string.IsNullOrWhiteSpace(puth))
+            if (!string.IsNullOrWhiteSpace(path))
             {
-                mineModel.OpenList(puth);
-            } 
+                Debug.WriteLine("Путь к Файлу:" + path);
+                mineModel.OpenList(path);
+            }
             else
             {
-                Message = "Список НЕ загружен";                
+                Message = "Список НЕ загружен";
             }
-            await Task.Delay(3000);
+            Thread.Sleep(3000);
             Message = string.Empty;
-        }
-        public async Task SaveListUser(string putn)
+        });
+        public async Task SaveListUserAsync(string patn) => await Task.Run(() =>
         {
-            if (!string.IsNullOrWhiteSpace(putn))
+            if (!string.IsNullOrWhiteSpace(patn))
             {
-                mineModel.SaveList(putn);
+                mineModel.SaveList(patn);
                 Message = "Список сохранён";
             }
             else
             {
                 Message = "Список НЕ сохранён";
             }
-            await Task.Delay(3000);
+            Thread.Sleep(3000);
             Message = string.Empty;
-        }
-       
+        });
+
     }
 }
