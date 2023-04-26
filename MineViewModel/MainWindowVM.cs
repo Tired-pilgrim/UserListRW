@@ -1,11 +1,8 @@
 ﻿using Model;
 using ModelLib;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Data;
 using VievModelLib;
 using ViewModelLib.Commands;
 
