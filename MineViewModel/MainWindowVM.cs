@@ -1,5 +1,6 @@
 ﻿using Model;
 using ModelLib;
+using System;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,12 +22,15 @@ namespace ViewModel
         public RelayCommand RemoveUserCommand { get; }
         public RelayCommand ClearUserCommand { get; }
         public ReadOnlyObservableCollection<User>? Users => mineModel.Users;
-        public MainViewModel(MainModel mineModel)
+        private Action<string, string> _messageDialog;
+        public MainViewModel(MainModel mineModel, Action<string, string> messageDialog)
         {
             AddUserVM = new(mineModel);
             this.mineModel = mineModel;
-            mineModel.Message += (_, e) => Message = e;
+            
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
+            _messageDialog = messageDialog;
+            mineModel.Message += (_, e) => messageDialog(e, "Список служащих");
             ClearUserCommand = new RelayCommand(() => mineModel.ClearUzer(), () => Users?.Count > 0);
             //object lockitems = new object();
             //BindingOperations.EnableCollectionSynchronization(Users, lockitems);
@@ -39,7 +43,7 @@ namespace ViewModel
             }
             else
             {
-                Message = "Список НЕ загружен";
+                _messageDialog("Список не открыт", "Список служащих");
             }
             Thread.Sleep(3000);
             Message = string.Empty;
@@ -53,7 +57,7 @@ namespace ViewModel
             }
             else
             {
-                Message = "Список НЕ сохранён";
+                _messageDialog("Список не сохранён", "Список служащих");
             }
             Thread.Sleep(3000);
             Message = string.Empty;

@@ -18,7 +18,7 @@ namespace View
         {
             MainModel _mainModel = new MainModel();
             UsersSync.ValueChanged += OnUsersChanged;
-            MainViewModel vm = new(_mainModel);
+            MainViewModel vm = new(_mainModel, ShowMessageDialog);
             UsersSync.SetValueBinding(new Binding(nameof(MainViewModel.Users)) { Source = vm });
             MainWindow _mainWindow = new MainWindow() { DataContext = vm };
             _mainWindow.Show();
@@ -33,6 +33,10 @@ namespace View
             {
                 BindingOperations.EnableCollectionSynchronization(@new, @new.SyncRoot);
             }
+        }
+        private void ShowMessageDialog(string message, string caption)
+        {
+            MessageBox.Show(message, caption);
         }
     }
 }
