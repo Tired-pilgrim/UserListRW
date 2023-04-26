@@ -14,6 +14,7 @@ namespace Views.Windows
 {
     public static class ViewHelper
     {
+        //Дрбавляем MessageBox
         public static RelayCommand AddUserCommand { get; } = new RelayCommand<FrameworkElement>(AddUserDialog);
 
         public static RelayCommand OpenListUserCommand { get; } = new RelayCommand<FrameworkElement>(OpenListUserDialogAsync);
