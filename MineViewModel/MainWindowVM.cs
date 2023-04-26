@@ -26,12 +26,10 @@ namespace ViewModel
         public MainViewModel(MainModel mineModel, Action<string> messageDialog)
         {
             AddUserVM = new(mineModel);
-            this.mineModel = mineModel;
-            
+            this.mineModel = mineModel;            
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
             _messageDialog = messageDialog;
-            mineModel.Message += MineModel_Message; 
-            ;
+            mineModel.Message += MineModel_Message;
             ClearUserCommand = new RelayCommand(() => mineModel.ClearUzer(), () => Users?.Count > 0);
             //object lockitems = new object();
             //BindingOperations.EnableCollectionSynchronization(Users, lockitems);
