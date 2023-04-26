@@ -6,7 +6,7 @@
         xmlns:view="clr-namespace:Views.Windows"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="830">
     
     <Grid>
         <DockPanel  LastChildFill="True">
@@ -17,13 +17,16 @@
                 <Button Content="Добавить" FontSize="16" Width="120" HorizontalAlignment="Center"
                         Margin="20 0"
                         Command="{view:View Add}"/>
-                <Button Content="Сохранить " FontSize="16" Width="120" HorizontalAlignment="Right"
+                <Button Content="Сохранить" FontSize="16" Width="120" HorizontalAlignment="Right"
                         Margin="20 0" 
                         Click="{view:View Save}"/>
-                <Button Content="Удалить " FontSize="16" Width="120" HorizontalAlignment="Right"
+                <Button Content="Удалить" FontSize="16" Width="120" HorizontalAlignment="Right"
                         Margin="20 0" 
                         Command="{Binding RemoveUserCommand}"
                         CommandParameter="{Binding ElementName=MyLV, Path=SelectedItem}"/>
+                <Button Content="Очистить" FontSize="16" Width="120" HorizontalAlignment="Right"
+                        Margin="20 0" 
+                        Command="{Binding ClearUserCommand}"/>
             </StackPanel>
             <StatusBar DockPanel.Dock="Bottom">
                 <StatusBarItem>

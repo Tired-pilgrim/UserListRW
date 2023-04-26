@@ -19,6 +19,7 @@ namespace ViewModel
         public AddUserVM AddUserVM { get; }
         private readonly MainModel mineModel;       
         public RelayCommand RemoveUserCommand { get; }
+        public RelayCommand ClearUserCommand { get; }
         public ReadOnlyObservableCollection<User>? Users => mineModel.Users;
         public MainViewModel(MainModel mineModel)
         {
@@ -26,6 +27,7 @@ namespace ViewModel
             this.mineModel = mineModel;
             mineModel.Message += (_, e) => Message = e;
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
+            ClearUserCommand = new RelayCommand(() => mineModel.ClearUzer(), () => Users?.Count > 0);
             //object lockitems = new object();
             //BindingOperations.EnableCollectionSynchronization(Users, lockitems);
         }

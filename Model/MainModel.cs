@@ -37,6 +37,11 @@ namespace Model
             lock (((ICollection)privateUsers).SyncRoot)
                 privateUsers.Remove(user);
         }
+        public void ClearUzer()
+        {
+            lock (((ICollection)privateUsers).SyncRoot)
+                privateUsers.Clear();
+        }
         public void OpenList(string path)
         {            
             if (!string.IsNullOrEmpty(path))
