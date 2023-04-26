@@ -29,8 +29,8 @@ namespace ViewModel
             this.mineModel = mineModel;
             mineModel.Message += (_, e) => Message = e;
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
-            object lockitems = new object();
-            BindingOperations.EnableCollectionSynchronization(Users, lockitems);
+            //object lockitems = new object();
+            //BindingOperations.EnableCollectionSynchronization(Users, lockitems);
         }
         public async Task OpenListUserAsync(string path) => await Task.Run(() =>
         {            
