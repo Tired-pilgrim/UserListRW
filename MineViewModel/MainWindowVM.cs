@@ -22,19 +22,27 @@ namespace ViewModel
         public RelayCommand RemoveUserCommand { get; }
         public RelayCommand ClearUserCommand { get; }
         public ReadOnlyObservableCollection<User>? Users => mineModel.Users;
-        private Action<string, string> _messageDialog;
-        public MainViewModel(MainModel mineModel, Action<string, string> messageDialog)
+        private Action<string> _messageDialog;
+        public MainViewModel(MainModel mineModel, Action<string> messageDialog)
         {
             AddUserVM = new(mineModel);
             this.mineModel = mineModel;
             
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
             _messageDialog = messageDialog;
-            mineModel.Message += (_, e) => messageDialog(e, "Список служащих");
+            mineModel.Message += MineModel_Message; 
+            ;
             ClearUserCommand = new RelayCommand(() => mineModel.ClearUzer(), () => Users?.Count > 0);
             //object lockitems = new object();
             //BindingOperations.EnableCollectionSynchronization(Users, lockitems);
         }
+
+        private void MineModel_Message(object? sender, string e)
+        {
+            if (e == "Открыт новый список") Message = e;
+            else _messageDialog(e);
+        }
+
         public async Task OpenListUserAsync(string path) => await Task.Run(() =>
         {            
             if (!string.IsNullOrWhiteSpace(path))
@@ -43,7 +51,7 @@ namespace ViewModel
             }
             else
             {
-                _messageDialog("Список не открыт", "Список служащих");
+                _messageDialog("Список не открыт");
             }
             Thread.Sleep(3000);
             Message = string.Empty;
@@ -57,7 +65,7 @@ namespace ViewModel
             }
             else
             {
-                _messageDialog("Список не сохранён", "Список служащих");
+                _messageDialog("Список не сохранён");
             }
             Thread.Sleep(3000);
             Message = string.Empty;

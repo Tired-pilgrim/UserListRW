@@ -23,6 +23,10 @@ namespace View
             MainWindow _mainWindow = new MainWindow() { DataContext = vm };
             _mainWindow.Show();
         }
+        private void ShowMessageDialog(string message)
+        {
+            MessageBox.Show(message, "Список служащих");
+        }
         private void OnUsersChanged(object? sender, DependencyPropertyChangedEventArgs e)
         {
             if (e.OldValue is ICollection old)
@@ -34,9 +38,6 @@ namespace View
                 BindingOperations.EnableCollectionSynchronization(@new, @new.SyncRoot);
             }
         }
-        private void ShowMessageDialog(string message, string caption)
-        {
-            MessageBox.Show(message, caption);
-        }
+       
     }
 }
