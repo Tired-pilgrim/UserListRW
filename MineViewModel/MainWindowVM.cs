@@ -17,7 +17,7 @@ namespace ViewModel
         public RelayCommand RemoveUserCommand { get; }
         public RelayCommand ClearUserCommand { get; }
         public ReadOnlyObservableCollection<User>? Users => mineModel.Users;
-        public event Action<string> MessageBus;
+        public event Action<string>? MessageBus;
         private Action<string> _messageDialog;
         public MainViewModel(MainModel mineModel, Action<string> messageDialog)
         {
@@ -33,9 +33,8 @@ namespace ViewModel
 
         private void MineModel_Message(object? sender, string e)
         {
-            if (e == "Открыт новый список")
-                //Message = e;
-                MessageBus(e);
+            if (e == "Открыт новый список" && MessageBus !=null)
+               MessageBus(e);
             else _messageDialog(e);
         }
 
@@ -57,7 +56,7 @@ namespace ViewModel
             if (!string.IsNullOrWhiteSpace(patn))
             {
                 mineModel.SaveList(patn);
-                MessageBus("Список сохранён");
+               if( MessageBus != null) MessageBus("Список сохранён");
             }
             else
             {

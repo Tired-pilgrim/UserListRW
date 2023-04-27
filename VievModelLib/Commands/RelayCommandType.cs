@@ -15,7 +15,7 @@ namespace ViewModelLib.Commands
     public class RelayCommand<T> : RelayCommand
     {
         /// <inheritdoc cref="RelayCommand(ExecuteHandler, CanExecuteHandler)"/>
-        public RelayCommand(ExecuteHandler<T> execute, CanExecuteHandler<T> canExecute = null)
+        public RelayCommand(ExecuteHandler<T> execute, CanExecuteHandler<T> ?canExecute = null)
             : base
             (
                   p =>

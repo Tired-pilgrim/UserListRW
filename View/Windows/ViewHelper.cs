@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Reflection;
-using System;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -12,7 +12,8 @@ using static Views.Windows.OpenSaveViewHelper;
 
 namespace Views.Windows
 {
-    public static class ViewHelper
+    [MarkupExtensionReturnType(typeof(RelayCommand))]
+    public class ViewHelper
     {
         public static RelayCommand AddUserCommand { get; } = new RelayCommand<FrameworkElement>(AddUserDialog);
 
@@ -95,7 +96,8 @@ namespace Views.Windows
                     {
                         NameMembers.Open => ViewHelper.OpenListUserCommand,
                         NameMembers.Save => ViewHelper.SaveListUserCommand,
-                        NameMembers.Add => ViewHelper.AddUserCommand
+                        NameMembers.Add => ViewHelper.AddUserCommand,
+                        _ => throw new NotImplementedException()
                     };
                 }
             }
@@ -108,7 +110,8 @@ namespace Views.Windows
                     {
                         NameMembers.Open => ViewHelper.OpenListUserHandler,
                         NameMembers.Save => ViewHelper.SaveListUserHandler,
-                        NameMembers.Add => ViewHelper.AddUserDialogHandler
+                        NameMembers.Add => ViewHelper.AddUserDialogHandler,
+                        _ => throw new NotImplementedException()
                     };
                 }
 
