@@ -2,6 +2,7 @@
 using ModelLib;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using VievModelLib;
@@ -10,18 +11,13 @@ using ViewModelLib.Commands;
 namespace ViewModel
 {
     public class MainViewModel : ViewModelBase, ISaveOpen
-    {
-        private string _message = string.Empty;
-        public string Message
-        {
-            get => _message;
-            set => Set(ref _message, ref value);
-        }
+    {        
         public AddUserVM AddUserVM { get; }
         private readonly MainModel mineModel;       
         public RelayCommand RemoveUserCommand { get; }
         public RelayCommand ClearUserCommand { get; }
         public ReadOnlyObservableCollection<User>? Users => mineModel.Users;
+        public event Action<string> MessageBus;
         private Action<string> _messageDialog;
         public MainViewModel(MainModel mineModel, Action<string> messageDialog)
         {
@@ -37,12 +33,14 @@ namespace ViewModel
 
         private void MineModel_Message(object? sender, string e)
         {
-            if (e == "Открыт новый список") Message = e;
+            if (e == "Открыт новый список")
+                //Message = e;
+                MessageBus(e);
             else _messageDialog(e);
         }
 
         public async Task OpenListUserAsync(string path) => await Task.Run(() =>
-        {            
+        {
             if (!string.IsNullOrWhiteSpace(path))
             {
                 mineModel.OpenList(path);
@@ -51,22 +49,22 @@ namespace ViewModel
             {
                 _messageDialog("Список не открыт");
             }
-            Thread.Sleep(3000);
-            Message = string.Empty;
+            //Thread.Sleep(3000);
+            //Message = string.Empty;
         });
         public async Task SaveListUserAsync(string patn) => await Task.Run(() =>
         {
             if (!string.IsNullOrWhiteSpace(patn))
             {
                 mineModel.SaveList(patn);
-                Message = "Список сохранён";
+                MessageBus("Список сохранён");
             }
             else
             {
                 _messageDialog("Список не сохранён");
             }
-            Thread.Sleep(3000);
-            Message = string.Empty;
+            //Thread.Sleep(3000);
+            //Message = string.Empty;
         });
     }
 }

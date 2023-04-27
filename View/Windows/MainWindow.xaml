@@ -30,7 +30,7 @@
             </StackPanel>
             <StatusBar DockPanel.Dock="Bottom">
                 <StatusBarItem>
-                    <TextBlock Text="{Binding Message}"/>
+                    <TextBlock x:Name="MessageBox"/>
                 </StatusBarItem>
             </StatusBar>
             <ListView x:Name="MyLV" ItemsSource="{Binding Users}" FontSize="16" DockPanel.Dock="Bottom">
