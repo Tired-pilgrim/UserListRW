@@ -17,10 +17,12 @@ namespace View
         public App()
         {
             MainModel _mainModel = new MainModel();
+
             UsersSync.ValueChanged += OnUsersChanged;
             MainViewModel vm = new(_mainModel, ShowMessageDialog);
             UsersSync.SetValueBinding(new Binding(nameof(MainViewModel.Users)) { Source = vm });
             MainWindow _mainWindow = new MainWindow() { DataContext = vm };
+            _ = new MessageBusHelper(_mainWindow);
             _mainWindow.Show();
         }
         private void ShowMessageDialog(string message)

@@ -12,7 +12,6 @@ using static Views.Windows.OpenSaveViewHelper;
 
 namespace Views.Windows
 {
-    [MarkupExtensionReturnType(typeof(RelayCommand))]
     public class ViewHelper
     {
         public static RelayCommand AddUserCommand { get; } = new RelayCommand<FrameworkElement>(AddUserDialog);
