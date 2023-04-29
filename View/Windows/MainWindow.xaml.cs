@@ -16,6 +16,5 @@ namespace Views.Windows
             InitializeComponent();
             
         }
-        
     }
 }

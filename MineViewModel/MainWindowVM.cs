@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using VievModelLib;
 using ViewModelLib.Commands;
 
@@ -17,14 +18,16 @@ namespace ViewModel
         public RelayCommand RemoveUserCommand { get; }
         public RelayCommand ClearUserCommand { get; }
         public ReadOnlyObservableCollection<User>? Users => mineModel.Users;
-        public event Action<string>? MessageBus;
-        private Action<string> _messageDialog;
-        public MainViewModel(MainModel mineModel, Action<string> messageDialog)
+        public  Action<Info> MessageBus;
+        private IDialogsService _dialogsService;
+       // private Action<string> _messageDialog;
+        public MainViewModel(MainModel mineModel, IDialogsService dialogsService)
         {
             AddUserVM = new(mineModel);
             this.mineModel = mineModel;            
+            _dialogsService = dialogsService;
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
-            _messageDialog = messageDialog;
+            //_messageDialog = messageDialog;
             mineModel.Message += MineModel_Message;
             ClearUserCommand = new RelayCommand(() => mineModel.ClearUzer(), () => Users?.Count > 0);
             //object lockitems = new object();
@@ -33,9 +36,13 @@ namespace ViewModel
 
         private void MineModel_Message(object? sender, string e)
         {
-            if (e == "Открыт новый список" && MessageBus !=null)
-               MessageBus(e);
-            else _messageDialog(e);
+            if (e == "Открыт новый список")
+            {
+                _dialogsService?.Get<Action<Info>>().Invoke(new Info(e));
+                
+            }
+             
+            //else _messageDialog(e);
         }
 
         public async Task OpenListUserAsync(string path) => await Task.Run(() =>
@@ -46,7 +53,7 @@ namespace ViewModel
             }
             else
             {
-                _messageDialog("Список не открыт");
+                _dialogsService.Get<Action<Error>>().Invoke(new Error("Список не открвт"));
             }
             //Thread.Sleep(3000);
             //Message = string.Empty;
@@ -56,14 +63,30 @@ namespace ViewModel
             if (!string.IsNullOrWhiteSpace(patn))
             {
                 mineModel.SaveList(patn);
-               if( MessageBus != null) MessageBus("Список сохранён");
+                _dialogsService.Get<Action<Info>>().Invoke(new Info("Список сохранён"));
             }
             else
             {
-                _messageDialog("Список не сохранён");
+                _dialogsService.Get<Action<Error>>().Invoke(new Error("Список не сохранён"));
             }
             //Thread.Sleep(3000);
             //Message = string.Empty;
         });
+    }
+    public class Error
+    {
+        public string error;
+        public Error(string message)
+        {
+            this.error = message;
+        }
+    }
+    public class Info
+    {
+        public string Message;
+        public Info(string message)
+        {
+            this.Message = message;
+        }
     }
 }

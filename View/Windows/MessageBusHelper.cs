@@ -31,18 +31,21 @@ namespace Views.Windows
             To = 0,
             Duration = TimeSpan.FromSeconds(1)
         };
-        public void MessageShow(string message)
+        public void MessageShow(Info message)
         {
             _ = _window.Dispatcher.BeginInvoke(async () =>
             {
                 (_window as MainWindow).MessageBox.Opacity = 1;
-                (_window as MainWindow).MessageBox.BeginAnimation(TextBlock.OpacityProperty, ZeroToOneAnimation);
-                (_window as MainWindow).MessageBox.Text = message;
+                (_window as MainWindow).MessageBox.BeginAnimation(UIElement.OpacityProperty, ZeroToOneAnimation);
+                (_window as MainWindow).MessageBox.Text = message.Message;
                 await Task.Delay(3000);
-                (_window as MainWindow).MessageBox.BeginAnimation(TextBlock.OpacityProperty, OneToZeroAnimation);
+                (_window as MainWindow).MessageBox.BeginAnimation(UIElement.OpacityProperty, OneToZeroAnimation);
             });
         }
-
+        public void ShowErrorDialog(Error message)
+        {
+            MessageBox.Show(message.error, "Список служащих");
+        }
         private void OnMessageUnsubscrib(object sender, RoutedEventArgs e)
         {
             _vm.MessageBus -= MessageShow;
