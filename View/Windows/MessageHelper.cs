@@ -29,7 +29,6 @@ namespace Views.Windows
         {
             _ = _window.Dispatcher.BeginInvoke(async () =>
             {
-                ((MainWindow)_window).MessageBox.Opacity = 1;
                 ((MainWindow)_window).MessageBox.BeginAnimation(UIElement.OpacityProperty, ZeroToOneAnimation);
                 ((MainWindow)_window).MessageBox.Text = message.info;
                 await Task.Delay(3000);
