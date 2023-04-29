@@ -23,7 +23,10 @@ namespace Views.Windows
         public static RelayCommand SaveListUserCommand { get; } =
             new RelayCommand<FrameworkElement>(SaveListUserDialogAsync);
 
+        //private static bool CanSaveListUserCommandExecute(FrameworkElement element)
+        //{
 
+        //}
         public static RoutedEventHandler AddUserDialogHandler { get; } = (s, _) => AddUserDialog((FrameworkElement)s);
         public static RoutedEventHandler OpenListUserHandler { get; } = (s, _) => OpenListUserDialogAsync((FrameworkElement)s);
         public static RoutedEventHandler SaveListUserHandler { get; } = (s, _) => SaveListUserDialogAsync((FrameworkElement)s);

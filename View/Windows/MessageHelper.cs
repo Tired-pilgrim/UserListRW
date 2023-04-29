@@ -6,10 +6,10 @@ using VievModelLib;
 
 namespace Views.Windows
 {
-    public class MessageBusHelper
+    public class MessageHelper
     {
         private Window _window;
-        public MessageBusHelper(Window window)
+        public MessageHelper(Window window)
         {
             _window = window;
         }

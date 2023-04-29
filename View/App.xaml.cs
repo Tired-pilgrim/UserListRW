@@ -17,7 +17,7 @@ namespace View
     {
         private readonly ValueProxy<ICollection> UsersSync = new ValueProxy<ICollection>();
         private readonly DialogsService _dialogsService;
-        private MessageBusHelper _messageBusHelper;
+        private MessageHelper _messageHelper;
         public App()
         {
             MainModel _mainModel = new MainModel();
@@ -26,14 +26,14 @@ namespace View
             MainViewModel vm = new(_mainModel, _dialogsService);
             UsersSync.SetValueBinding(new Binding(nameof(MainViewModel.Users)) { Source = vm });
             MainWindow _mainWindow = new MainWindow() { DataContext = vm };
-            _messageBusHelper = new MessageBusHelper(_mainWindow);
+            _messageHelper = new MessageHelper(_mainWindow);
             _mainWindow.Show();
         }
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            _dialogsService.Register(_messageBusHelper.MessageShow);
-            _dialogsService.Register(_messageBusHelper.ShowErrorDialog);
+            _dialogsService.Register(_messageHelper.MessageShow);
+            _dialogsService.Register(_messageHelper.ShowErrorDialog);
         }
         
         private void OnUsersChanged(object? sender, DependencyPropertyChangedEventArgs e)

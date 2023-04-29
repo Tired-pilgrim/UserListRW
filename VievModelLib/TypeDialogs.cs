@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows;
-
-namespace VievModelLib
+﻿namespace VievModelLib
 {
     public class Error
     {
@@ -9,7 +6,6 @@ namespace VievModelLib
         public Error(string message)
         {
             this.error = message;
-
         }
     }
     public class Info
