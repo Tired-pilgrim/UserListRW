@@ -21,12 +21,14 @@ namespace Views.Windows
 
         public static RelayCommand OpenListUserCommand { get; } = new RelayCommand<FrameworkElement>(OpenListUserDialogAsync);
         public static RelayCommand SaveListUserCommand { get; } =
-            new RelayCommand<FrameworkElement>(SaveListUserDialogAsync);
+            new RelayCommand<FrameworkElement>(SaveListUserDialogAsync, CanSaveListUserCommandExecute);
 
-        //private static bool CanSaveListUserCommandExecute(FrameworkElement element)
-        //{
-
-        //}
+        private static bool CanSaveListUserCommandExecute(FrameworkElement element)
+        {
+            MainViewModel? vm = element.FindData<MainViewModel>();
+            if (vm is not null && vm.Users is not null) return vm.Users.Count > 0;
+            return false;
+        }
         public static RoutedEventHandler AddUserDialogHandler { get; } = (s, _) => AddUserDialog((FrameworkElement)s);
         public static RoutedEventHandler OpenListUserHandler { get; } = (s, _) => OpenListUserDialogAsync((FrameworkElement)s);
         public static RoutedEventHandler SaveListUserHandler { get; } = (s, _) => SaveListUserDialogAsync((FrameworkElement)s);
