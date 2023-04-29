@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 
-namespace ViewModel
+namespace VievModelLib
 {
-    //public interface ISaveOpen
-    //{
-    //    Task OpenListUserAsync(string path);
-    //    Task SaveListUser(string path);
-    //}
+    public interface ISaveOpen
+    {
+        Task OpenListUserAsync(string path);
+        Task SaveListUserAsync(string path);
+    }
 }

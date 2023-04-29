@@ -2,10 +2,7 @@
 using ModelLib;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using VievModelLib;
 using ViewModelLib.Commands;
 
@@ -28,8 +25,6 @@ namespace ViewModel
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
             mineModel.Message += MineModel_Message;
             ClearUserCommand = new RelayCommand(() => mineModel.ClearUzer(), () => Users?.Count > 0);
-            //object lockitems = new object();
-            //BindingOperations.EnableCollectionSynchronization(Users, lockitems);
         }
 
         private void MineModel_Message(object? sender, string e)
@@ -38,6 +33,7 @@ namespace ViewModel
             {
                 _dialogsService?.Get<Action<Info>>()?.Invoke(new Info(e));                
             }
+            else _dialogsService?.Get<Action<Error>>()?.Invoke(new Error(e));
         }
 
         public async Task OpenListUserAsync(string path) => await Task.Run(() =>
@@ -75,10 +71,10 @@ namespace ViewModel
     }
     public class Info
     {
-        public string Message;
+        public string message;
         public Info(string message)
         {
-            this.Message = message;
+            this.message = message;
         }
     }
 }

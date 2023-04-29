@@ -28,7 +28,6 @@ namespace Model
         public event EventHandler<string>? Message;
         public void AddUzer(User user)
         {
-            Debug.WriteLine("Добавлен сотрудник");
             lock (((ICollection)privateUsers).SyncRoot)
                 privateUsers.Add(user);
         }

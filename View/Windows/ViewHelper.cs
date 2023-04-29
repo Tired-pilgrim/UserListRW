@@ -8,7 +8,10 @@ using System.Windows.Markup;
 using ViewLib;
 using ViewModel;
 using ViewModelLib.Commands;
+using ViewModelLib;
 using static Views.Windows.OpenSaveViewHelper;
+using VievModelLib;
+using System.Xml.Linq;
 
 namespace Views.Windows
 {
@@ -17,7 +20,8 @@ namespace Views.Windows
         public static RelayCommand AddUserCommand { get; } = new RelayCommand<FrameworkElement>(AddUserDialog);
 
         public static RelayCommand OpenListUserCommand { get; } = new RelayCommand<FrameworkElement>(OpenListUserDialogAsync);
-        public static RelayCommand SaveListUserCommand { get; } = new RelayCommand<FrameworkElement>(SaveListUserDialogAsync);
+        public static RelayCommand SaveListUserCommand { get; } =
+            new RelayCommand<FrameworkElement>(SaveListUserDialogAsync);
 
 
         public static RoutedEventHandler AddUserDialogHandler { get; } = (s, _) => AddUserDialog((FrameworkElement)s);
