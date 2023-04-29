@@ -10,10 +10,10 @@
     }
     public class Info
     {
-        public string message;
+        public string info;
         public Info(string message)
         {
-            this.message = message;
+            this.info = message;
         }
     }
 }

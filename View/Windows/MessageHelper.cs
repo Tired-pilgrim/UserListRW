@@ -31,7 +31,7 @@ namespace Views.Windows
             {
                 ((MainWindow)_window).MessageBox.Opacity = 1;
                 ((MainWindow)_window).MessageBox.BeginAnimation(UIElement.OpacityProperty, ZeroToOneAnimation);
-                ((MainWindow)_window).MessageBox.Text = message.message;
+                ((MainWindow)_window).MessageBox.Text = message.info;
                 await Task.Delay(3000);
                 ((MainWindow)_window).MessageBox.BeginAnimation(UIElement.OpacityProperty, OneToZeroAnimation);
                 
