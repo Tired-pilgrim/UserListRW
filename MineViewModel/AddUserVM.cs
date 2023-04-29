@@ -15,6 +15,7 @@ namespace ViewModel
                 {
                     User user = new User { Name = this.Name, Family = this.Family, Job = this.Job };
                     model.AddUzer(user);
+                    Name = string.Empty; Family = string.Empty; Job = string.Empty; 
                 },
                 () => !(string.IsNullOrWhiteSpace(Name) ||
                           string.IsNullOrWhiteSpace(Family) ||
