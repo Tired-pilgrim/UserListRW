@@ -20,7 +20,6 @@ namespace View
         private MessageBusHelper _messageBusHelper;
         public App()
         {
-
             MainModel _mainModel = new MainModel();
             _dialogsService = new DialogsService();
             UsersSync.ValueChanged += OnUsersChanged;
@@ -30,12 +29,9 @@ namespace View
             _messageBusHelper = new MessageBusHelper(_mainWindow);
             _mainWindow.Show();
         }
-        //public delegate void Info<in T>(T obj);
-        //public Action<Info>? MessageBus;
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            // _dialogsService.Register<Action<string>>(_messageBusHelper.MessageShow);
             _dialogsService.Register(_messageBusHelper.MessageShow);
             _dialogsService.Register(_messageBusHelper.ShowErrorDialog);
         }

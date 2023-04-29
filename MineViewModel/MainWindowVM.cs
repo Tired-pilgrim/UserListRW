@@ -18,16 +18,14 @@ namespace ViewModel
         public RelayCommand RemoveUserCommand { get; }
         public RelayCommand ClearUserCommand { get; }
         public ReadOnlyObservableCollection<User>? Users => mineModel.Users;
-        public  Action<Info> MessageBus;
+        //public  Action<Info> ActInfo;
         private IDialogsService _dialogsService;
-       // private Action<string> _messageDialog;
         public MainViewModel(MainModel mineModel, IDialogsService dialogsService)
         {
             AddUserVM = new(mineModel);
             this.mineModel = mineModel;            
             _dialogsService = dialogsService;
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
-            //_messageDialog = messageDialog;
             mineModel.Message += MineModel_Message;
             ClearUserCommand = new RelayCommand(() => mineModel.ClearUzer(), () => Users?.Count > 0);
             //object lockitems = new object();
@@ -38,11 +36,8 @@ namespace ViewModel
         {
             if (e == "Открыт новый список")
             {
-                _dialogsService?.Get<Action<Info>>().Invoke(new Info(e));
-                
+                _dialogsService?.Get<Action<Info>>()?.Invoke(new Info(e));                
             }
-             
-            //else _messageDialog(e);
         }
 
         public async Task OpenListUserAsync(string path) => await Task.Run(() =>
@@ -53,24 +48,20 @@ namespace ViewModel
             }
             else
             {
-                _dialogsService.Get<Action<Error>>().Invoke(new Error("Список не открвт"));
+                _dialogsService.Get<Action<Error>>()?.Invoke(new Error("Список не открыт"));
             }
-            //Thread.Sleep(3000);
-            //Message = string.Empty;
         });
         public async Task SaveListUserAsync(string patn) => await Task.Run(() =>
         {
             if (!string.IsNullOrWhiteSpace(patn))
             {
                 mineModel.SaveList(patn);
-                _dialogsService.Get<Action<Info>>().Invoke(new Info("Список сохранён"));
+                _dialogsService.Get<Action<Info>>()?.Invoke(new Info("Список сохранён"));
             }
             else
             {
-                _dialogsService.Get<Action<Error>>().Invoke(new Error("Список не сохранён"));
+                _dialogsService.Get<Action<Error>>()?.Invoke(new Error("Список не сохранён"));
             }
-            //Thread.Sleep(3000);
-            //Message = string.Empty;
         });
     }
     public class Error
@@ -79,6 +70,7 @@ namespace ViewModel
         public Error(string message)
         {
             this.error = message;
+
         }
     }
     public class Info

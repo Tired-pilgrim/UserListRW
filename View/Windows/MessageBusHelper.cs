@@ -15,21 +15,18 @@ namespace Views.Windows
         {
             _window = window;
             _vm = (MainViewModel)_window.DataContext;
-            window.Loaded += OnMessageSubscrib;
-            window.Unloaded += OnMessageUnsubscrib;
         }
-        private void OnMessageSubscrib(object sender, RoutedEventArgs e) => _vm.MessageBus += MessageShow;
         private readonly DoubleAnimation ZeroToOneAnimation = new DoubleAnimation()
         {
             From = 0,
             To = 1,
-            Duration = TimeSpan.FromSeconds(1)
+            Duration = TimeSpan.FromSeconds(0.5)
         };
         private readonly DoubleAnimation OneToZeroAnimation = new DoubleAnimation()
         {
             From = 1,
             To = 0,
-            Duration = TimeSpan.FromSeconds(1)
+            Duration = TimeSpan.FromSeconds(0.5)
         };
         public void MessageShow(Info message)
         {
@@ -45,10 +42,6 @@ namespace Views.Windows
         public void ShowErrorDialog(Error message)
         {
             MessageBox.Show(message.error, "Список служащих");
-        }
-        private void OnMessageUnsubscrib(object sender, RoutedEventArgs e)
-        {
-            _vm.MessageBus -= MessageShow;
         }
     }
 }
