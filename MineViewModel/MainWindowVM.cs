@@ -15,7 +15,6 @@ namespace ViewModel
         public RelayCommand RemoveUserCommand { get; }
         public RelayCommand ClearUserCommand { get; }
         public ReadOnlyObservableCollection<User>? Users => mineModel.Users;
-        //public  Action<Info> ActInfo;
         private IDialogsService _dialogsService;
         public MainViewModel(MainModel mineModel, IDialogsService dialogsService)
         {
