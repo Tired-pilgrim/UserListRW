@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Animation;
-using ViewModel;
+using VievModelLib;
 
 namespace Views.Windows
 {
