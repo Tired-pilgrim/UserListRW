@@ -23,7 +23,7 @@ namespace View
             MainModel _mainModel = new MainModel();
             //_dialogsService = new DialogsService();
             UsersSync.ValueChanged += OnUsersChanged;
-            MainViewModel vm = new(_mainModel, DialogsService.Default);
+            MainViewModel vm = new(_mainModel);
             UsersSync.SetValueBinding(new Binding(nameof(MainViewModel.Users)) { Source = vm });
             MainWindow _mainWindow = new MainWindow() { DataContext = vm };
             //_messageHelper = new MessageHelper(_mainWindow);

@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using JointLib;
+using Model;
 using ModelLib;
 using System;
 using System.Collections.ObjectModel;
@@ -15,12 +16,12 @@ namespace ViewModel
         public RelayCommand RemoveUserCommand { get; }
         public RelayCommand ClearUserCommand { get; }
         public ReadOnlyObservableCollection<User>? Users => mineModel.Users;
-        private IDialogsService _dialogsService;
-        public MainViewModel(MainModel mineModel, IDialogsService dialogsService)
+        private DialogsService _dialogsService;
+        public MainViewModel(MainModel mineModel)
         {
             AddUserVM = new(mineModel);
             this.mineModel = mineModel;            
-            _dialogsService = dialogsService;
+            _dialogsService = DialogsService.Default;
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
             mineModel.Message += MineModel_Message;
             ClearUserCommand = new RelayCommand(() => mineModel.ClearUzer(), () => Users?.Count > 0);

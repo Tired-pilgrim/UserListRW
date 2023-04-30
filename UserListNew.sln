@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelLib", "MdelLib\ModelLib.csproj", "{5D24464D-85F5-4F3E-A05D-334C33B780EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Views", "View\Views.csproj", "{2CCC5CDF-F464-4385-86F8-01EDADEA6FA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Views", "View\Views.csproj", "{2CCC5CDF-F464-4385-86F8-01EDADEA6FA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JointLib", "jointLib\JointLib.csproj", "{3F203777-F911-442E-9628-E5B937C9D653}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{2CCC5CDF-F464-4385-86F8-01EDADEA6FA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CCC5CDF-F464-4385-86F8-01EDADEA6FA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CCC5CDF-F464-4385-86F8-01EDADEA6FA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F203777-F911-442E-9628-E5B937C9D653}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F203777-F911-442E-9628-E5B937C9D653}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F203777-F911-442E-9628-E5B937C9D653}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F203777-F911-442E-9628-E5B937C9D653}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

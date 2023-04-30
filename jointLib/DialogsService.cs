@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using VievModelLib;
 
-namespace Views.Windows
+namespace JointLib
 {
     /// <summary>Простейший диалоговый сервис, для регистрации и получении делегатов диалогов по их типу.</summary>
-    public class DialogsService:IDialogsService
+    public class DialogsService
     {
         private readonly Dictionary<Type, Delegate> delegats = new Dictionary<Type, Delegate>();
 
@@ -30,7 +29,7 @@ namespace Views.Windows
         /// <summary>Получение зарегистрированного делегата.</summary>
         /// <typeparam name="T">Тип делегата.</typeparam>
         /// <returns>Возвращает зарегистрированный делегат или <see langword="null"/>.</returns>
-        public T? Get<T>() where T : Delegate
+        public T Get<T>() where T : Delegate
         {
             if (delegats.TryGetValue(typeof(T), out Delegate @delegate))
                 return (T)@delegate;
