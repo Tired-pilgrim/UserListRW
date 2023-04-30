@@ -30,7 +30,9 @@
             </StackPanel>
             <StatusBar DockPanel.Dock="Bottom">
                 <StatusBarItem>
-                    <TextBlock x:Name="MessageBox"/>
+                    <TextBlock x:Name="MessageBox"
+                               Text="{Binding InfoText, Source={x:Static view:MessageDO.Instance}}"
+                               Opacity="{Binding InfoOpacity, Source={x:Static view:MessageDO.Instance}}"/>
                 </StatusBarItem>
             </StatusBar>
             <ListView x:Name="MyLV" ItemsSource="{Binding Users}" FontSize="16" DockPanel.Dock="Bottom">
