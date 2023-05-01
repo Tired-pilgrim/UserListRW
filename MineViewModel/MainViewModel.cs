@@ -3,6 +3,7 @@ using Model;
 using ModelLib;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using VievModelLib;
 using ViewModelLib.Commands;
@@ -17,16 +18,16 @@ namespace ViewModel
         public RelayCommand ClearUserCommand { get; }
         public ReadOnlyObservableCollection<User>? Users => mineModel.Users;
         private DialogsService _dialogsService;
-        public MainViewModel(MainModel mineModel)
+        public MainViewModel(MainModel mineModel, DialogsService dialogsService)
         {
             AddUserVM = new(mineModel);
-            this.mineModel = mineModel;            
+            this.mineModel = mineModel;
             _dialogsService = DialogsService.Default;
             RemoveUserCommand = new RelayCommand<User>(User => mineModel.RemoveUzer(User));
             mineModel.Message += MineModel_Message;
             ClearUserCommand = new RelayCommand(() => mineModel.ClearUzer(), () => Users?.Count > 0);
         }
-
+        public MainViewModel(MainModel mineModel) : this(mineModel, DialogsService.Default) { }
         private void MineModel_Message(object? sender, string e)
         {
             if (e == "Открыт новый список")
