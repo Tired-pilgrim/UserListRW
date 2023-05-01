@@ -18,7 +18,7 @@ namespace ViewModel
         public RelayCommand ClearUserCommand { get; }
         public ReadOnlyObservableCollection<User>? Users => mineModel.Users;
         private DialogsService _dialogsService;
-        public MainViewModel(MainModel mineModel)
+        public MainViewModel(MainModel mineModel, DialogsService dialogsService)
         {
             AddUserVM = new(mineModel);
             this.mineModel = mineModel;
@@ -27,6 +27,11 @@ namespace ViewModel
             mineModel.Message += MineModel_Message;
             ClearUserCommand = new RelayCommand(() => mineModel.ClearUzer(), () => Users?.Count > 0);
         }
+        /// <summary>Перегруженный конструктор, экземпляр сервиса  
+        /// </summary> по умолчанию передаётся в исходный конструктор
+        public MainViewModel(MainModel mineModel) : this(mineModel, DialogsService.Default) { }
+
+        /// <summary>Только для режима разработки !!!</summary>
         public MainViewModel() : this(new MainModel()) { }
         private void MineModel_Message(object? sender, string e)
         {
