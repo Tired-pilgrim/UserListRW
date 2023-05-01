@@ -5,13 +5,11 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Markup;
+using VievModelLib;
 using ViewLib;
 using ViewModel;
 using ViewModelLib.Commands;
-using ViewModelLib;
 using static Views.Windows.OpenSaveViewHelper;
-using VievModelLib;
-using System.Xml.Linq;
 
 namespace Views.Windows
 {

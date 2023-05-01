@@ -5,10 +5,10 @@ namespace ViewLib
 {
     public class MyCloseBut:Button
     {
-            public MyCloseBut()
-            {
-                Click += (s, e) => Window.GetWindow(this).Close();
-            }
+        public MyCloseBut()
+        {
+            Click += (s, e) => Window.GetWindow(this).Close();
+        }
         
     }
 }
