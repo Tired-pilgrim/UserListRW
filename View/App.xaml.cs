@@ -32,8 +32,8 @@ namespace View
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            _dialogsService.Register(_messageHelper.MessageShow);
-            _dialogsService.Register(_messageHelper.ShowErrorDialog);
+            _dialogsService.Register(new Action<Info>(_messageHelper.MessageShow));
+            _dialogsService.Register(new Action<Error>(_messageHelper.ShowErrorDialog));
         }
         
         private void OnUsersChanged(object? sender, DependencyPropertyChangedEventArgs e)
